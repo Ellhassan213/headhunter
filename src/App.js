@@ -1,25 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Switch } from 'react-router-dom'
 
-function App() {
+import Header from './components/Header'
+import MainPage from './pages/MainPage'
+import CreateVenue from './pages/CreateVenue'
+import CreateArtist from './pages/CreateArtist'
+import Venues from './pages/Venues'
+import ShowVenue from './pages/ShowVenue'
+import Artists from './pages/Artists'
+import ShowArtist from './pages/ShowArtist'
+
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Header />
+      <Switch>
+        <Route exact path="/">
+          <MainPage />
+        </Route>
+        <Route exact path="/create-venue">
+          <CreateVenue />
+        </Route>
+        <Route exact path="/create-artist">
+          <CreateArtist />
+        </Route>
+        <Route exact path="/venues">
+          <Venues />
+        </Route>
+        <Route exact path="/venues/:venueId">
+          <ShowVenue />
+        </Route>
+        <Route exact path="/artists">
+          <Artists />
+        </Route>
+        <Route exact path="/artists/:artistId">
+          <ShowArtist />
+        </Route>
+      </Switch>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
