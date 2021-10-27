@@ -1,12 +1,11 @@
 import React, { useContext } from 'react'
 import { Context } from '../Context'
-import groupBy from '../utils/DataHandling/groupBy' // NOTE: Generally good practice to add some unit testing to your utils
 import DisplayGroupedList from '../components/DisplayGroupedList'
+import _ from 'lodash'
 
 const Venues = () => {
   const { venueList } = useContext(Context)
-  const groupByCity = groupBy('city')
-  const groupedByCity = groupByCity(venueList)
+  const groupedByCity = _.chain(venueList).groupBy('city').value()
 
   return (
     <div className="venues-page">

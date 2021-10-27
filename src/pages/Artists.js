@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { Context } from '../Context' // NOTE: code-style consistency, spaces around destructured value or not. ESlint is great for enforcing this.
+import { Context } from '../Context'
 import { Link } from 'react-router-dom'
 
 const Artists = () => {
