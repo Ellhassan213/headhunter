@@ -51,7 +51,7 @@ header {
   color: var(--black);
 }
 
-.main-page, .create-venue-page, .create-artist-page, .venues-page, .artists-page {
+.main-page, .create-venue-page, .create-artist-page, .venues-page, .artists-page, .create-decorator-page {
   margin: 50px;
 }
 

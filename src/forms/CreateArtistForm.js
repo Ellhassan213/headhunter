@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useForm from '../hooks/useForm'
 import { Context } from '../Context'
+import { InputField, SubmitField, TextAreaField, Form } from './FormTemplate'
 
 // NOTE: Can both forms be refactored to use a schema mechanism?
 
@@ -49,112 +50,86 @@ const CreateArtistForm = () => {
   }
 
   return (
-    <form className="form-wrapper" onSubmit={createArtist}>
-      <div className="form-group">
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
+    <>
+      <Form onSubmit={createArtist}>
+        <InputField
+          labelName='Name'
+          name='name'
           value={artistFormInputs.name}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.name}</small>
-      </div>
-      <div className="form-group">
-        <label>{'City & County'}</label>
-        <input
-          type="text"
-          name="city"
+        <InputField
+          labelName='City'
+          name='city'
           value={artistFormInputs.city}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
-          placeholder="City"
         />
-        <small>{formInputsErrors?.city}</small>
-        <input
-          type="text"
-          name="county"
+        <InputField
+          labelName='County'
+          name='county'
           value={artistFormInputs.county}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
-          placeholder="County"
         />
-        <small>{formInputsErrors?.county}</small>
-      </div>
-      <div className="form-group">
-        <label>Genre</label>
-        <input
-          type="text"
-          name="genre"
+        <InputField
+          labelName='Genre'
+          name='genre'
           value={artistFormInputs.genre}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.genre}</small>
-      </div>
-      <div className="form-group">
-        <label>Phone</label>
-        <input
-          type="text"
-          name="phone"
+        <InputField
+          labelName='Phone Number'
+          name='phone'
           value={artistFormInputs.phone}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.phone}</small>
-      </div>
-      <div className="form-group">
-        <label>Website Link</label>
-        <input
-          type="text"
-          name="websiteLink"
+        <InputField
+          labelName='Website Link'
+          name='websiteLink'
           value={artistFormInputs.websiteLink}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.websiteLink}</small>
-      </div>
-      <div className="form-group">
-        <label>Instagram Link</label>
-        <input
-          type="text"
-          name="instagramLink"
+        <InputField
+          labelName='Instagram Link'
+          name='instagramLink'
           value={artistFormInputs.instagramLink}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.instagramLink}</small>
-      </div>
-      <div className="form-group">
-        <label>Image Link</label>
-        <input
-          type="text"
-          name="imageLink"
+        <InputField
+          labelName='Image Link'
+          name='imageLink'
           value={artistFormInputs.imageLink}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.imageLink}</small>
-      </div>
-      <div className="form-group">
-        <label>Description</label>
-        <textarea
-          type="text"
-          name="description"
+        <TextAreaField
+          labelName='Description'
+          name='description'
           value={artistFormInputs.description}
+          errors={formInputsErrors}
           onChange={(event) => handleChange(event, setInput)}
           onBlur={handleBlur}
         />
-        <small>{formInputsErrors?.description}</small>
-      </div>
-      <input
-        type="submit"
-        className="form-submit-btn"
-        value={submitButtonText}
-        disabled={isSubmitting}
-      />
-    </form>
+        <SubmitField
+          value={submitButtonText}
+          disabled={isSubmitting}
+        />
+      </Form>
+    </>
   )
 }
 

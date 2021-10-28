@@ -9,6 +9,7 @@ import Venues from './pages/Venues'
 import ShowVenue from './pages/ShowVenue'
 import Artists from './pages/Artists'
 import ShowArtist from './pages/ShowArtist'
+import CreateDecorator from './pages/CreateDecorator'
 
 const App = () => {
   return (
@@ -35,6 +36,9 @@ const App = () => {
         </Route>
         <Route exact path="/artists/:artistId">
           <ShowArtist />
+        </Route>
+        <Route exact path="/create-decorator">
+          <CreateDecorator />
         </Route>
       </Switch>
     </div>

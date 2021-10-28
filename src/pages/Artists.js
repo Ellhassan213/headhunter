@@ -6,10 +6,9 @@ const Artists = () => {
   const { artistList } = useContext(Context)
 
   return (
-    // It's still possible to get id/key collisions, good strategy to enforce uniqueness by concatenating with map index param i.e. `${artist.id}${index}`
     <div className="artists-page">
-      {artistList.map(artist =>
-        <div key={artist.id}>
+      {artistList.map((artist, index) =>
+        <div key={`${artist.id}${index}`}>
           <i className="ri-footprint-line"></i>
           <Link to={`/artists/${artist.id}`} className="page-link">
               <h4>{artist.name}</h4>
