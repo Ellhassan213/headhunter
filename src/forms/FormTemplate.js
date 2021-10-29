@@ -2,18 +2,19 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 export const InputField = (props) => {
-  const { labelName, name, value, errors, onChange, onBlur } = props
+  const { nameTestId, nameErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
     <div className="form-group">
       <label>{labelName}</label>
       <input
+        data-testid={nameTestId}
         type='text'
         name={name}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
       />
-      <small>{errors?.[name]}</small>
+      {errors?.[name] && <small data-testid={nameErrorTestId}>{errors?.[name]}</small>}
     </div>
   )
 }
@@ -59,6 +60,8 @@ export const Form = (props) => {
 }
 
 InputField.propTypes = {
+  nameTestId: PropTypes.string,
+  nameErrorTestId: PropTypes.string,
   className: PropTypes.string,
   labelName: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,

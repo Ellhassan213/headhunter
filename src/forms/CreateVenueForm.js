@@ -48,6 +48,8 @@ const CreateVenueForm = () => {
     <>
     <Form onSubmit={createVenue}>
       <InputField
+        nameTestId='name-input'
+        nameErrorTestId='name-input-error'
         labelName='Name'
         name='name'
         value={venueFormInputs.name}
