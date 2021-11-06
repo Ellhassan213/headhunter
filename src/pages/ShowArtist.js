@@ -1,11 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
+import { Context } from '../Context'
+import NotFound from '../components/NotFound'
 
 const ShowArtist = () => {
   const { artistId } = useParams()
+  const { artistList } = useContext(Context)
+  const isArtist = artistList.filter(obj => obj.id.toString() === artistId)
   return (
     <div>
-      <p>{artistId}</p>
+      {isArtist.length > 0 ? <p>{artistId}</p> : <NotFound />}
     </div>
   )
 }

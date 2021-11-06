@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
+import NotFound from './components/NotFound'
 
 import Header from './components/Header'
 import MainPage from './pages/MainPage'
@@ -39,6 +40,9 @@ const App = () => {
         </Route>
         <Route exact path="/create-decorator">
           <CreateDecorator />
+        </Route>
+        <Route>
+          <NotFound />
         </Route>
       </Switch>
     </div>
