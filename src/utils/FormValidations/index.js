@@ -20,3 +20,5 @@ export default {
 }
 
 export { validateForm }
+
+// Note: I can do better validations all round

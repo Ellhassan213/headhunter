@@ -23,3 +23,5 @@ describe('<CreateVenue />', () => {
     expect(screen.queryByTestId('name-input-error').textContent).toBe('required')
   })
 })
+
+// Note: I can do alot more tests

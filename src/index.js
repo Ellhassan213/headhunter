@@ -15,3 +15,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 )
+
+// Note: May be I will refactor at some point with TypeScript

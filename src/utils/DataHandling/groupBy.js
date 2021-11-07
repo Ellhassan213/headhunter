@@ -17,3 +17,5 @@ export default groupBy
 // const groupByBrand = groupBy(['brand']);
 // const groupByColor = groupBy(['color']);
 // const groupByBrandAndYear = groupBy(['brand', 'produced']);
+
+// Note: This is not obsolette, I am using Lodash ..

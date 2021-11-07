@@ -22,7 +22,7 @@ const DisplayGroupedList = (props) => {
               </div>
             )
           })}
-            <br />
+          <br />
         </div>
       )
     })

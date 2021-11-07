@@ -4,7 +4,7 @@ import useForm from '../hooks/useForm'
 import { Context } from '../Context'
 import { InputField, SubmitField, TextAreaField, Form } from './FormTemplate'
 
-// NOTE: Can both forms be refactored to use a schema mechanism?
+// NOTE: I can do schema here?
 
 const CreateArtistForm = () => {
   const history = useHistory()
@@ -39,7 +39,7 @@ const CreateArtistForm = () => {
       setIsSubmitting(true)
       // NOTE: Can abstract away this setTimeout to a separate module function e.g. handleSubmission that uses a flag to mock or invoke the actual creation
       setTimeout(() => {
-        artistFormInputs.id = artistList.length + 1
+        artistFormInputs.id = artistList.length + 1 // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
         setArtistList(artistList.concat(artistFormInputs))
         console.log('Submitted!')
         setSubmitButtonText('Submit')

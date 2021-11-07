@@ -1,6 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
+// Note: I think i could create make an Image Link component
+// Or perhaps turn this implementation into a Carousel
+
 const MainPage = () => {
   return (
     <div className="main-page">
