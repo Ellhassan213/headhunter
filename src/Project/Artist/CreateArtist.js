@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateArtistForm from '../forms/CreateArtistForm'
+import CreateArtistForm from './CreateArtistForm'
 
 const CreateArtist = () => {
   return (

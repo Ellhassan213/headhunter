@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { Context } from '../Context'
+import _ from 'lodash'
 
 const DisplayGroupedList = (props) => {
   return (
@@ -29,4 +31,15 @@ const DisplayGroupedList = (props) => {
   )
 }
 
-export default DisplayGroupedList
+const Venues = () => {
+  const { venueList } = useContext(Context)
+  const groupedByCity = _.chain(venueList).groupBy('city').value()
+
+  return (
+    <div className="venues-page">
+      <DisplayGroupedList groupedList={groupedByCity}/>
+    </div>
+  )
+}
+
+export default Venues

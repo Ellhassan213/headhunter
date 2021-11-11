@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import artistData from './data/artistData'
-import venueData from './data/venueData'
+import artistData from '../shared/data/artistData'
+import venueData from '../shared/data/venueData'
 
 const Context = React.createContext()
 

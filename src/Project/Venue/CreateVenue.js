@@ -1,5 +1,5 @@
 import React from 'react'
-import CreateVenueForm from '../forms/CreateVenueForm'
+import CreateVenueForm from './CreateVenueForm'
 
 const CreateVenue = () => {
   return (

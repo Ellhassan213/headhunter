@@ -1,6 +1,6 @@
 import React from 'react'
-import { customRender, screen, cleanup, fireEvent } from './custom-render'
-import CreateVenue from '../src/pages/CreateVenue'
+import { customRender, screen, cleanup, fireEvent } from '../custom-render'
+import CreateVenue from './CreateVenue'
 
 afterEach(cleanup)
 

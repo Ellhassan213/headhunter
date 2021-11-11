@@ -1,8 +1,13 @@
 import React, { useContext, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import useForm from '../hooks/useForm'
 import { Context } from '../Context'
-import { InputField, SubmitField, TextAreaField, Form } from './FormTemplate'
+import useForm from '../../shared/hooks/useForm'
+import {
+  InputField,
+  SubmitField,
+  TextAreaField,
+  Form
+} from '../../shared/components/FormTemplate'
 
 // NOTE: I can do schema here?
 

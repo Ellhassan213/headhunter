@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import { Context } from '../Context'
-import NotFound from '../components/NotFound'
+import NotFound from '../../shared/components/NotFound'
 
 const ShowVenue = () => {
   const { venueId } = useParams()
