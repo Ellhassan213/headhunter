@@ -1,4 +1,4 @@
-const nameValidation = (value) => {
+const nameValidation = (value: string) => {
   const re = /^[a-zA-Z ]*$/
   const isNameValid = re.test(value)
   if (!isNameValid) {

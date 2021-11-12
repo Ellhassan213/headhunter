@@ -2,18 +2,15 @@ import React, { StrictMode } from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import { BrowserRouter as Router } from 'react-router-dom'
-
-import { Provider } from './Project/Context'
+import ErrorBoundary from './shared/components/ErrorBoundary'
 
 ReactDOM.render(
-  <Provider>
+  <StrictMode>
     <Router>
-      <StrictMode>
+      <ErrorBoundary>
         <App />
-      </StrictMode>
+      </ErrorBoundary>
     </Router>
-  </Provider>,
+  </StrictMode>,
   document.getElementById('root')
 )
-
-// Note: May be I will refactor at some point with TypeScript

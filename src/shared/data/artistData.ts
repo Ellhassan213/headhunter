@@ -1,7 +1,24 @@
+// type ArtistsFormInputs = {
+//   id: string,
+//   name: string,
+//   city: string,
+//   county: string,
+//   genre: string,
+//   phone: string,
+//   imageLink: string,
+//   websiteLink: string,
+//   instagramLink: string,
+//   description: string
+// }
+
+// type Data = {
+//   artists: ArtistsFormInputs[]
+// }
+
 const artistData = {
   artists: [
     {
-      id: 1,
+      id: '1',
       name: 'Wizkid',
       city: 'Lagos',
       county: 'South',
@@ -13,7 +30,7 @@ const artistData = {
       description: 'Naija no dey carry last'
     },
     {
-      id: 2,
+      id: '2',
       name: 'Burna Boy',
       city: 'Lagos',
       county: 'South',
@@ -25,7 +42,7 @@ const artistData = {
       description: 'Naija no dey carry last'
     },
     {
-      id: 3,
+      id: '3',
       name: 'Tiwa Savage',
       city: 'Lagos',
       county: 'South',
@@ -37,7 +54,7 @@ const artistData = {
       description: 'Naija no dey carry last'
     },
     {
-      id: 4,
+      id: '4',
       name: 'Temi',
       city: 'Lagos',
       county: 'South',

@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Context } from '../Context'
+import { useVenues, useUpdateVenues } from './VenueContext'
 import useForm from '../../shared/hooks/useForm'
 import {
   InputField,
@@ -14,8 +14,10 @@ const CreateVenueForm = () => {
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { venueList, setVenueList } = useContext(Context)
+  const { venueList } = useVenues()
+  const setVenueList = useUpdateVenues()
   const [venueFormInputs, setVenueFormInputs] = useState({
+    id: '',
     name: '',
     city: '',
     county: '',
@@ -25,21 +27,21 @@ const CreateVenueForm = () => {
     description: ''
   })
 
-  const setInput = (name, value) => {
+  const setInput = (name: string, value: string) => {
     setVenueFormInputs({
       ...venueFormInputs,
       [name]: value
     })
   }
 
-  const createVenue = (event) => {
+  const createVenue = (event: SyntheticEvent) => {
     event.preventDefault()
     const errors = handleSubmit()
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(true)
       setTimeout(() => {
-        venueFormInputs.id = venueList.length + 1
+        venueFormInputs.id = (venueList.length + 1).toString()
         const arrCopy = venueList
         setVenueList(arrCopy.concat(venueFormInputs))
         setSubmitButtonText('Submit')
@@ -53,8 +55,8 @@ const CreateVenueForm = () => {
     <>
     <Form onSubmit={createVenue}>
       <InputField
-        nameTestId='name-input'
-        nameErrorTestId='name-input-error'
+        fieldTestId='name-input'
+        fieldErrorTestId='name-input-error'
         labelName='Name'
         name='name'
         value={venueFormInputs.name}

@@ -1,4 +1,8 @@
-const validateForm = (formInputsErrors) => {
+type ErrorTypes = {
+  [key: string]: string
+}
+
+const validateForm = (formInputsErrors: ErrorTypes) => {
   let errors = 0
   if (Object.keys(formInputsErrors).length === 0) {
     errors = 1

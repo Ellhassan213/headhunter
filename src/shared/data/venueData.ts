@@ -1,7 +1,7 @@
 const venueData = {
   venues: [
     {
-      id: 1,
+      id: '1',
       name: 'EUS Event Center',
       city: 'Kaduna',
       county: 'North Central',
@@ -11,7 +11,7 @@ const venueData = {
       description: 'Home of Awesomeness'
     },
     {
-      id: 2,
+      id: '2',
       name: 'Truth',
       city: 'Kaduna',
       county: 'North Central',
@@ -21,7 +21,7 @@ const venueData = {
       description: 'Home of truth'
     },
     {
-      id: 3,
+      id: '3',
       name: 'Marvels',
       city: 'Abuja',
       county: 'FCT',
@@ -31,7 +31,7 @@ const venueData = {
       description: "Juiceman's venue for all dreams"
     },
     {
-      id: 4,
+      id: '4',
       name: 'One Stop',
       city: 'Abuja',
       county: 'FCT',

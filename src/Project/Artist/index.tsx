@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
-import { Context } from '../Context'
+import React from 'react'
+import { useArtists } from './ArtistContext'
 import { Link } from 'react-router-dom'
 
 const Artists = () => {
-  const { artistList } = useContext(Context)
+  const { artistList } = useArtists()
 
   return (
     <div className="artists-page">

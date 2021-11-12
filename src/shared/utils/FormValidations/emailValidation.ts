@@ -1,4 +1,4 @@
-const emailValidation = (value) => {
+const emailValidation = (value: string) => {
   const re = /\S+@\S+\.\S+/
   const isEmailValid = re.test(value)
   if (!isEmailValid) {

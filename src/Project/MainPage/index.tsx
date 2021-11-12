@@ -24,22 +24,6 @@ const MainPage = () => {
           </div>
         </div>
       </Link>
-      <Link className="header-link" to="/create-decorator">
-        <div className="image-container">
-          <i className="ri-landscape-fill"></i>
-          <div className="image-overlay">
-            <div className="image-text">Create a decorator</div>
-          </div>
-        </div>
-      </Link>
-      <Link className="header-link" to="/create-event">
-        <div className="image-container">
-          <i className="ri-landscape-line"></i>
-          <div className="image-overlay">
-            <div className="image-text">Create an event</div>
-          </div>
-        </div>
-      </Link>
     </div>
   )
 }

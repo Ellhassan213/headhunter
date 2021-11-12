@@ -5,7 +5,11 @@ import basicValidation from './basicValidation'
 import emailValidation from './emailValidation'
 import validateForm from './validateForm'
 
-export default {
+type ValidationTypes = {
+  [key: string]: (value: string) => string,
+}
+
+const formValidations: ValidationTypes = {
   name: nameValidation,
   city: nameValidation,
   county: nameValidation,
@@ -19,6 +23,7 @@ export default {
   description: basicValidation
 }
 
+export default formValidations
 export { validateForm }
 
 // Note: I can do better validations all round

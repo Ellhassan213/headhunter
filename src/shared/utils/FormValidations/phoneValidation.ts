@@ -1,4 +1,4 @@
-const phoneValidation = (value) => {
+const phoneValidation = (value: string) => {
   const re = /^[0-9]+$/
   const isEmailValid = re.test(value)
   if (!isEmailValid) {

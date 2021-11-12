@@ -1,6 +1,6 @@
-import React, { useContext, useState } from 'react'
+import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Context } from '../Context'
+import { useArtists, useUpdateArtists } from './ArtistContext'
 import useForm from '../../shared/hooks/useForm'
 import {
   InputField,
@@ -14,10 +14,12 @@ import {
 const CreateArtistForm = () => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
-  const { artistList, setArtistList } = useContext(Context)
+  const { artistList } = useArtists()
+  const setArtistList = useUpdateArtists()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [artistFormInputs, setArtistFormInputs] = useState({
+    id: '',
     name: '',
     city: '',
     county: '',
@@ -29,14 +31,14 @@ const CreateArtistForm = () => {
     description: ''
   })
 
-  const setInput = (name, value) => {
+  const setInput = (name: string, value: string) => {
     setArtistFormInputs({
       ...artistFormInputs,
       [name]: value
     })
   }
 
-  const createArtist = (event) => {
+  const createArtist = (event: SyntheticEvent) => {
     event.preventDefault()
     const errors = handleSubmit()
     if (errors === 0) {
@@ -44,7 +46,7 @@ const CreateArtistForm = () => {
       setIsSubmitting(true)
       // NOTE: Can abstract away this setTimeout to a separate module function e.g. handleSubmission that uses a flag to mock or invoke the actual creation
       setTimeout(() => {
-        artistFormInputs.id = artistList.length + 1 // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
+        artistFormInputs.id = (artistList.length + 1).toString() // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
         setArtistList(artistList.concat(artistFormInputs))
         console.log('Submitted!')
         setSubmitButtonText('Submit')
