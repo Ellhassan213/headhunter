@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import artistData from '../../shared/data/artistData'
 
-type ContextProviderProps = { children: React.ReactNode }
 type ArtistsFormInputs = {
   id: string,
   name: string,
@@ -14,8 +13,10 @@ type ArtistsFormInputs = {
   instagramLink: string,
   description: string
 }
+
 type Artists = { artistList: ArtistsFormInputs[] }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
+type ContextProviderProps = { children: React.ReactNode }
 
 const ArtistStateContext = React.createContext<Artists | undefined>(undefined)
 const ArtistDispatchContext = React.createContext<SetArtists | undefined>(undefined)

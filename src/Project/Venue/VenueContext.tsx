@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import venueData from '../../shared/data/venueData'
 
-type ContextProviderProps = { children: React.ReactNode }
 type VenuesFormInputs = {
   id: string,
   name: string,
@@ -14,6 +13,7 @@ type VenuesFormInputs = {
 }
 type Venues = { venueList: VenuesFormInputs[] }
 type SetVenues = (setVenueList: VenuesFormInputs[]) => void
+type ContextProviderProps = { children: React.ReactNode }
 
 const VenueStateContext = React.createContext<Venues | undefined>(undefined)
 const VenueDispatchContext = React.createContext<SetVenues | undefined>(undefined)

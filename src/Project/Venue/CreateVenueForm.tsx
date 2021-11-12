@@ -42,8 +42,7 @@ const CreateVenueForm = () => {
       setIsSubmitting(true)
       setTimeout(() => {
         venueFormInputs.id = (venueList.length + 1).toString()
-        const arrCopy = venueList
-        setVenueList(arrCopy.concat(venueFormInputs))
+        setVenueList(venueList.slice().concat(venueFormInputs))
         setSubmitButtonText('Submit')
         setIsSubmitting(false)
         history.push('/venues')

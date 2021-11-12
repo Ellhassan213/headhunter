@@ -1,20 +1,3 @@
-// type ArtistsFormInputs = {
-//   id: string,
-//   name: string,
-//   city: string,
-//   county: string,
-//   genre: string,
-//   phone: string,
-//   imageLink: string,
-//   websiteLink: string,
-//   instagramLink: string,
-//   description: string
-// }
-
-// type Data = {
-//   artists: ArtistsFormInputs[]
-// }
-
 const artistData = {
   artists: [
     {

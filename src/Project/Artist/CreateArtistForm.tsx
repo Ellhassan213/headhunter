@@ -47,7 +47,7 @@ const CreateArtistForm = () => {
       // NOTE: Can abstract away this setTimeout to a separate module function e.g. handleSubmission that uses a flag to mock or invoke the actual creation
       setTimeout(() => {
         artistFormInputs.id = (artistList.length + 1).toString() // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
-        setArtistList(artistList.concat(artistFormInputs))
+        setArtistList(artistList.slice().concat(artistFormInputs))
         console.log('Submitted!')
         setSubmitButtonText('Submit')
         setIsSubmitting(false)
