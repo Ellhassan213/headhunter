@@ -1,6 +1,6 @@
 import React from 'react'
-import { useArtists } from './ArtistContext'
 import { Link } from 'react-router-dom'
+import { useArtists } from './ArtistContext'
 
 const Artists = () => {
   const { artistList } = useArtists()

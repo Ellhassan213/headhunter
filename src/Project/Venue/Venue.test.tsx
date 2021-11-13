@@ -9,7 +9,7 @@ describe('<CreateVenue />', () => {
     customRender(<CreateVenue />)
     expect(screen.getByText(/Name/i)).toBeInTheDocument()
 
-    const nameInput = screen.getByTestId('name-input')
+    const nameInput = screen.getByTestId('name-input') as HTMLInputElement
     expect(nameInput).toBeInTheDocument()
     expect(nameInput).toHaveAttribute('type', 'text')
 
@@ -20,7 +20,7 @@ describe('<CreateVenue />', () => {
     fireEvent.change(nameInput, { target: { value: '' } })
     fireEvent.blur(nameInput)
     expect(screen.queryByTestId('name-input-error')).toBeInTheDocument()
-    expect(screen.queryByTestId('name-input-error').textContent).toBe('required')
+    expect(screen.queryByTestId('name-input-error')?.textContent).toBe('required')
   })
 })
 

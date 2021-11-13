@@ -10,7 +10,7 @@ const useForm = () => {
     return errorMessage
   }
 
-  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, callback: (name: string, value:string) => void) => {
+  const handleChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, callback: (name: string, value: string) => void) => {
     const { name, value } = event.target
     callback(name, value)
   }

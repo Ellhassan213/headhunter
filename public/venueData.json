@@ -1,0 +1,52 @@
+[
+  {
+    "id": "1",
+    "name": "Sydney Opera House",
+    "city": "Lagos",
+    "county": "South",
+    "address": "No. 1 Sydney",
+    "phone": "08030303030",
+    "imageLink": "https://github.com/Ellhassan213/ImageMaster/blob/master/VenueImages/SydneyOperaHouse.jpg?raw=true",
+    "description": "Bla Bla Bla..."
+  },
+  {
+    "id": "2",
+    "name": "Hollywood Bowl",
+    "city": "Lagos",
+    "county": "South",
+    "address": "No. 1 Hollywood",
+    "phone": "08030303030",
+    "imageLink": "https://github.com/Ellhassan213/ImageMaster/blob/master/VenueImages/HollywoodBowl.jpg?raw=true",
+    "description": "Bla Bla Bla..."
+  },
+  {
+    "id": "3",
+    "name": "Red Rocks",
+    "city": "Lagos",
+    "county": "South",
+    "address": "No. 1 Red Rocks",
+    "phone": "08030303030",
+    "imageLink": "https://github.com/Ellhassan213/ImageMaster/blob/master/VenueImages/RedRocks.jpg?raw=true",
+    "description": "Bla Bla Bla..."
+  },
+  {
+    "id": "4",
+    "name": "Salt Mines",
+    "city": "London",
+    "county": "South",
+    "address": "No. 1 Salt Mines",
+    "phone": "08030303030",
+    "imageLink": "https://github.com/Ellhassan213/ImageMaster/blob/master/VenueImages/SaltMines.jpg?raw=true",
+    "description": "Bla Bla Bla..."
+  },
+  {
+    "id": "5",
+    "name": "Royal Albert Hall",
+    "city": "London",
+    "county": "South",
+    "address": "No. 1 Albert House",
+    "phone": "08030303030",
+    "imageLink": "https://github.com/Ellhassan213/ImageMaster/blob/master/VenueImages/RoyalAlbertHall.jpg?raw=true",
+    "description": "Bla Bla Bla..."
+  }
+]

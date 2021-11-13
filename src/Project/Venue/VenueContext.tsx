@@ -1,4 +1,10 @@
-import React, { useState } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  ReactNode,
+  createContext
+} from 'react'
 import venueData from '../../shared/data/venueData'
 
 type VenuesFormInputs = {
@@ -13,13 +19,19 @@ type VenuesFormInputs = {
 }
 type Venues = { venueList: VenuesFormInputs[] }
 type SetVenues = (setVenueList: VenuesFormInputs[]) => void
-type ContextProviderProps = { children: React.ReactNode }
+type ContextProviderProps = { children: ReactNode }
 
-const VenueStateContext = React.createContext<Venues | undefined>(undefined)
-const VenueDispatchContext = React.createContext<SetVenues | undefined>(undefined)
+const VenueStateContext = createContext<Venues | undefined>(undefined)
+const VenueDispatchContext = createContext<SetVenues | undefined>(undefined)
 
 const VenueProvider = ({ children }: ContextProviderProps) => {
   const [venueList, setVenueList] = useState(venueData.venues)
+
+  useEffect(() => {
+    fetch('venueData.json')
+      .then(response => response.json())
+      .then(data => setVenueList(data))
+  }, [])
 
   return (
     <VenueStateContext.Provider value={{ venueList }}>
@@ -29,7 +41,7 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
 }
 
 const useVenues = () => {
-  const context = React.useContext(VenueStateContext)
+  const context = useContext(VenueStateContext)
   if (context === undefined) {
     throw new Error('useVenues must be used within a VenuesProvider')
   }
@@ -37,7 +49,7 @@ const useVenues = () => {
 }
 
 const useUpdateVenues = () => {
-  const context = React.useContext(VenueDispatchContext)
+  const context = useContext(VenueDispatchContext)
   if (context === undefined) {
     throw new Error('useUpdateVenues must be used within a VenuesProvider')
   }

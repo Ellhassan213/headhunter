@@ -1,4 +1,10 @@
-import React, { useState } from 'react'
+import React, {
+  useState,
+  useEffect,
+  useContext,
+  ReactNode,
+  createContext
+} from 'react'
 import artistData from '../../shared/data/artistData'
 
 type ArtistsFormInputs = {
@@ -16,13 +22,21 @@ type ArtistsFormInputs = {
 
 type Artists = { artistList: ArtistsFormInputs[] }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
-type ContextProviderProps = { children: React.ReactNode }
+type ContextProviderProps = { children: ReactNode }
 
-const ArtistStateContext = React.createContext<Artists | undefined>(undefined)
-const ArtistDispatchContext = React.createContext<SetArtists | undefined>(undefined)
+const ArtistStateContext = createContext<Artists | undefined>(undefined)
+const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)
 
 const ArtistProvider = ({ children }: ContextProviderProps) => {
   const [artistList, setArtistList] = useState(artistData.artists)
+
+  useEffect(() => {
+    fetch('artistData.json')
+      .then(response => response.json())
+      .then(data => {
+        setArtistList(data)
+      })
+  }, [])
 
   return (
     <ArtistStateContext.Provider value={{ artistList }}>
@@ -32,7 +46,7 @@ const ArtistProvider = ({ children }: ContextProviderProps) => {
 }
 
 const useArtists = () => {
-  const context = React.useContext(ArtistStateContext)
+  const context = useContext(ArtistStateContext)
   if (context === undefined) {
     throw new Error('useArtists must be used within a ArtistProvider')
   }
@@ -40,7 +54,7 @@ const useArtists = () => {
 }
 
 const useUpdateArtists = () => {
-  const context = React.useContext(ArtistDispatchContext)
+  const context = useContext(ArtistDispatchContext)
   if (context === undefined) {
     throw new Error('useUpdateArtists must be used within a ArtistProvider')
   }
