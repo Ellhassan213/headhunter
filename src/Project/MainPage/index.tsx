@@ -9,11 +9,11 @@ const artistImage = 'https://github.com/Ellhassan213/ImageMaster/blob/master/Art
 
 const MainPage = () => {
   return (
-    <div className="main-page">
+    <div className="standard-page">
       <h1>Head Hunter</h1>
       <Link className="header-link" to="/create-venue">
         <div className="image-container">
-          <img className="ri-landscape-fill" src={venueImage} />
+          <img className="main-page-image" src={venueImage} />
           <div className="image-overlay">
             <div className="image-text">Create a venue</div>
           </div>
@@ -21,7 +21,7 @@ const MainPage = () => {
       </Link>
       <Link className="header-link" to="/create-artist">
         <div className="image-container">
-          <img className="ri-landscape-line" src={artistImage}/>
+          <img className="main-page-image" src={artistImage}/>
           <div className="image-overlay">
              <div className="image-text">Create an artist</div>
           </div>

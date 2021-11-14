@@ -3,7 +3,7 @@ import CreateArtistForm from './CreateArtistForm'
 
 const CreateArtist = () => {
   return (
-    <div className="create-artist-page">
+    <div className="standard-page">
       <h3>List a new artist</h3>
       <CreateArtistForm />
     </div>

@@ -8,7 +8,7 @@ const Venues = () => {
   const groupedByCity = _.chain(venueList).groupBy('city').value()
 
   return (
-    <div className="venues-page">
+    <div className="standard-page">
       {Object.keys(groupedByCity).map(city => {
         return (
           <div key={city}>

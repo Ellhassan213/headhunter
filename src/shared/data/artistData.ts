@@ -2,51 +2,51 @@ const artistData = {
   artists: [
     {
       id: '1',
-      name: 'Wizkid',
+      name: 'Side Bar',
       city: 'Lagos',
       county: 'South',
-      genre: 'Afro',
+      genre: 'Country Music',
       phone: '08030303030',
       websiteLink: 'https://website.com',
       instagramLink: 'https://instagram.com',
-      imageLink: 'https://image.com',
-      description: 'Naija no dey carry last'
+      imageLink: 'https://github.com/Ellhassan213/ImageMaster/blob/master/ArtistImages/SideBar.jpg?raw=true',
+      description: 'Bla Bla Bla...'
     },
     {
       id: '2',
-      name: 'Burna Boy',
+      name: 'Beyonce',
       city: 'Lagos',
       county: 'South',
-      genre: 'Afro',
+      genre: 'Hip Hop',
       phone: '08030303030',
       websiteLink: 'https://website.com',
       instagramLink: 'https://instagram.com',
-      imageLink: 'https://image.com',
-      description: 'Naija no dey carry last'
+      imageLink: 'https://github.com/Ellhassan213/ImageMaster/blob/master/ArtistImages/Beyonce.jpg?raw=true',
+      description: 'Bla Bla Bla...'
     },
     {
       id: '3',
-      name: 'Tiwa Savage',
+      name: 'Michael Jackon',
       city: 'Lagos',
       county: 'South',
-      genre: 'Afro',
+      genre: 'Jazz',
       phone: '08030303030',
       websiteLink: 'https://website.com',
       instagramLink: 'https://instagram.com',
-      imageLink: 'https://image.com',
-      description: 'Naija no dey carry last'
+      imageLink: 'https://github.com/Ellhassan213/ImageMaster/blob/master/ArtistImages/MichealJackson.jpg?raw=true',
+      description: 'Bla Bla Bla...'
     },
     {
       id: '4',
-      name: 'Temi',
+      name: 'Rihanna',
       city: 'Lagos',
       county: 'South',
-      genre: 'Afro',
+      genre: 'Hip Hop',
       phone: '08030303030',
       websiteLink: 'https://website.com',
       instagramLink: 'https://instagram.com',
-      imageLink: 'https://image.com',
-      description: 'Naija no dey carry last'
+      imageLink: 'https://github.com/Ellhassan213/ImageMaster/blob/master/ArtistImages/RIhanna.jpg?raw=true',
+      description: 'Bla Bla Bla...'
     }
   ]
 }

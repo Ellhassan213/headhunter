@@ -46,14 +46,15 @@ header {
   font-size: 50px;
 }
 
-.ri-landscape-fill, .ri-landscape-line {
+.main-page-image {
   width: 100%;
   height: 100%;
   font-size: 350px;
   color: var(--black);
+  border-radius: 5px;
 }
 
-.main-page, .create-venue-page, .create-artist-page, .venues-page, .artists-page, .create-decorator-page {
+.standard-page {
   margin: 50px;
 }
 
@@ -152,4 +153,77 @@ header {
 .grouped-list-heading {
   margin: -10px 0;
   padding: 0;
+}
+
+.basic-details-container {
+  display: inline-flex;
+  position: relative;
+}
+
+
+.monospace {
+  font-family: monospace;
+  text-transform: uppercase;
+}
+
+.monospace > h1{
+  font-size: 2.5rem;
+}
+
+.subtitle {
+  opacity: 0.5;
+}
+
+.genres {
+  margin-bottom: 15px;
+}
+span.genre {
+  display: inline-block;
+  font-family: monospace;
+  padding: 4px 8px;
+  background: var(--light-blue);
+  margin: 0 5px 5px 0;
+  border-radius: 3px;
+  color: var(--purple);
+  font-size: 0.9em;
+  text-transform: uppercase;
+  border: solid 1px var(--purple);
+}
+
+.description {
+  display: inline-block;
+  padding: 20px 30px;
+  margin-top: 30px;
+  border-radius: 15px;
+  font-weight: bold;
+  background: linear-gradient(var(--beige), var(--pink));
+}
+
+.description-lead > p{
+  margin-top: 30px;
+}
+
+.description-detail {
+  max-width: 450px;
+}
+
+.show-img-container {
+  height: auto; 
+  width: auto; 
+  max-width: 500px; 
+}
+
+.show-img-container > img{
+  width: 100%;
+  margin: 0px 0px 0px 200px;
+  border-radius: 15px;
+}
+
+.show-details {
+  width: 450px;
+  height: 500px;
+}
+
+.ri-phone-fill, .ri-earth-line, .ri-home-heart-fill {
+  margin: 10px 10px 0px 0px;
 }

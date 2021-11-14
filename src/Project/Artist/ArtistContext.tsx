@@ -27,13 +27,15 @@ type ContextProviderProps = { children: ReactNode }
 const ArtistStateContext = createContext<Artists | undefined>(undefined)
 const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)
 
+// let initialData: ArtistsFormInputs[]
+
 const ArtistProvider = ({ children }: ContextProviderProps) => {
   const [artistList, setArtistList] = useState(artistData.artists)
 
   useEffect(() => {
     fetch('artistData.json')
       .then(response => response.json())
-      .then(data => {
+      .then((data:ArtistsFormInputs[]) => {
         setArtistList(data)
       })
   }, [])

@@ -6,7 +6,7 @@ const Artists = () => {
   const { artistList } = useArtists()
 
   return (
-    <div className="artists-page">
+    <div className="standard-page">
       {artistList.map((artist, index) =>
         <div key={`${artist.id}${index}`}>
           <i className="ri-footprint-line"></i>

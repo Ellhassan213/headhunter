@@ -3,7 +3,7 @@ import CreateVenueForm from './CreateVenueForm'
 
 const CreateVenue = () => {
   return (
-    <div className="create-venue-page">
+    <div className="standard-page">
       <h3>List a new venue</h3>
       <CreateVenueForm />
     </div>
