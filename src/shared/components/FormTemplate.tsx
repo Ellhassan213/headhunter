@@ -45,17 +45,18 @@ export const InputField = (props: FieldProps) => {
 }
 
 export const TextAreaField = (props: FieldProps) => {
-  const { labelName, name, value, errors, onChange, onBlur } = props
+  const { fieldTestId, fieldErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
     <div className="form-group">
       <label>{labelName}</label>
       <textarea
+        data-testid={fieldTestId}
         name={name}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
       />
-      <small>{errors?.[name]}</small>
+      {errors?.[name] && <small data-testid={fieldErrorTestId}>{errors?.[name]}</small>}
     </div>
   )
 }

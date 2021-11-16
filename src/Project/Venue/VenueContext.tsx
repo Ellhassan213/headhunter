@@ -6,17 +6,8 @@ import React, {
   createContext
 } from 'react'
 import venueData from '../../shared/data/venueData'
+import { VenuesFormInputs } from './models/VenueFormInputs'
 
-type VenuesFormInputs = {
-  id: string,
-  name: string,
-  city: string,
-  county: string,
-  address: string,
-  phone: string,
-  imageLink: string,
-  description: string
-}
 type Venues = { venueList: VenuesFormInputs[] }
 type SetVenues = (setVenueList: VenuesFormInputs[]) => void
 type ContextProviderProps = { children: ReactNode }

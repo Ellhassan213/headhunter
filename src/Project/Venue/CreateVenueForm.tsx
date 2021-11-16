@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useVenues, useUpdateVenues } from './VenueContext'
 import useForm from '../../shared/hooks/useForm'
+import { VenueFormInputTestIds, VenueFormInputErrorTestIds } from './models/VenueFormInputs'
 import {
   InputField,
   SubmitField,
@@ -40,13 +41,11 @@ const CreateVenueForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(true)
-      setTimeout(() => {
-        venueFormInputs.id = (venueList.length + 1).toString()
-        setVenueList(venueList.slice().concat(venueFormInputs))
-        setSubmitButtonText('Submit')
-        setIsSubmitting(false)
-        history.push('/venues')
-      }, 2000)
+      venueFormInputs.id = (venueList.length + 1).toString()
+      setVenueList(venueList.slice().concat(venueFormInputs))
+      setSubmitButtonText('Submit')
+      setIsSubmitting(false)
+      history.push('/venues')
     }
   }
 
@@ -54,8 +53,8 @@ const CreateVenueForm = () => {
     <>
     <Form onSubmit={createVenue}>
       <InputField
-        fieldTestId='name-input'
-        fieldErrorTestId='name-input-error'
+        fieldTestId={VenueFormInputTestIds.Name}
+        fieldErrorTestId={VenueFormInputErrorTestIds.Name}
         labelName='Name'
         name='name'
         value={venueFormInputs.name}
@@ -64,6 +63,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <InputField
+        fieldTestId={VenueFormInputTestIds.City}
+        fieldErrorTestId={VenueFormInputErrorTestIds.City}
         labelName='City'
         name='city'
         value={venueFormInputs.city}
@@ -72,6 +73,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <InputField
+        fieldTestId={VenueFormInputTestIds.County}
+        fieldErrorTestId={VenueFormInputErrorTestIds.County}
         labelName='County'
         name='county'
         value={venueFormInputs.county}
@@ -80,6 +83,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <InputField
+        fieldTestId={VenueFormInputTestIds.Address}
+        fieldErrorTestId={VenueFormInputErrorTestIds.Address}
         labelName='Address'
         name='address'
         value={venueFormInputs.address}
@@ -88,6 +93,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <InputField
+        fieldTestId={VenueFormInputTestIds.Phone}
+        fieldErrorTestId={VenueFormInputErrorTestIds.Phone}
         labelName='Phone'
         name='phone'
         value={venueFormInputs.phone}
@@ -96,6 +103,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <InputField
+        fieldTestId={VenueFormInputTestIds.ImageLink}
+        fieldErrorTestId={VenueFormInputErrorTestIds.ImageLink}
         labelName='Image Link'
         name='imageLink'
         value={venueFormInputs.imageLink}
@@ -104,6 +113,8 @@ const CreateVenueForm = () => {
         onBlur={handleBlur}
       />
       <TextAreaField
+        fieldTestId={VenueFormInputTestIds.Description}
+        fieldErrorTestId={VenueFormInputErrorTestIds.Description}
         labelName='Description'
         name='description'
         value={venueFormInputs.description}

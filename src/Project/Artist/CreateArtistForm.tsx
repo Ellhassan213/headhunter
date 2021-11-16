@@ -2,6 +2,7 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { useArtists, useUpdateArtists } from './ArtistContext'
 import useForm from '../../shared/hooks/useForm'
+import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds } from './models/ArtistFormInputs'
 import {
   InputField,
   SubmitField,
@@ -44,15 +45,11 @@ const CreateArtistForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(true)
-      // NOTE: Can abstract away this setTimeout to a separate module function e.g. handleSubmission that uses a flag to mock or invoke the actual creation
-      setTimeout(() => {
-        artistFormInputs.id = (artistList.length + 1).toString() // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
-        setArtistList(artistList.slice().concat(artistFormInputs))
-        console.log('Submitted!')
-        setSubmitButtonText('Submit')
-        setIsSubmitting(false)
-        history.push('/artists')
-      }, 2000)
+      artistFormInputs.id = (artistList.length + 1).toString() // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
+      setArtistList(artistList.slice().concat(artistFormInputs))
+      setSubmitButtonText('Submit')
+      setIsSubmitting(false)
+      history.push('/artists')
     }
   }
 
@@ -60,6 +57,8 @@ const CreateArtistForm = () => {
     <>
       <Form onSubmit={createArtist}>
         <InputField
+          fieldTestId={ArtistFormInputTestIds.Name}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.Name}
           labelName='Name'
           name='name'
           value={artistFormInputs.name}
@@ -68,6 +67,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.City}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.City}
           labelName='City'
           name='city'
           value={artistFormInputs.city}
@@ -76,6 +77,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.County}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.County}
           labelName='County'
           name='county'
           value={artistFormInputs.county}
@@ -84,6 +87,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.Genre}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.Genre}
           labelName='Genre'
           name='genre'
           value={artistFormInputs.genre}
@@ -92,6 +97,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.Phone}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.Phone}
           labelName='Phone Number'
           name='phone'
           value={artistFormInputs.phone}
@@ -100,6 +107,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.WebsiteLink}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.WebsiteLink}
           labelName='Website Link'
           name='websiteLink'
           value={artistFormInputs.websiteLink}
@@ -108,6 +117,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.InstagramLink}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.InstagramLink}
           labelName='Instagram Link'
           name='instagramLink'
           value={artistFormInputs.instagramLink}
@@ -116,6 +127,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <InputField
+          fieldTestId={ArtistFormInputTestIds.ImageLink}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.ImageLink}
           labelName='Image Link'
           name='imageLink'
           value={artistFormInputs.imageLink}
@@ -124,6 +137,8 @@ const CreateArtistForm = () => {
           onBlur={handleBlur}
         />
         <TextAreaField
+          fieldTestId={ArtistFormInputTestIds.Description}
+          fieldErrorTestId={ArtistFormInputErrorTestIds.Description}
           labelName='Description'
           name='description'
           value={artistFormInputs.description}
