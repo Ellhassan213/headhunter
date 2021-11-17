@@ -1,9 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { useArtists } from './ArtistContext'
+import { useArtists, useUpdateArtists } from './ArtistContext'
+import Axios from 'axios'
 
 const Artists = () => {
   const { artistList } = useArtists()
+  const setArtistList = useUpdateArtists()
+
+  useEffect(() => {
+    Axios.get('/api/getArtists').then((response) => {
+      setArtistList(response.data)
+    }).catch((e) => console.log(e))
+  }, [])
 
   return (
     <div className="standard-page">

@@ -5,7 +5,7 @@ import React, {
   ReactNode,
   createContext
 } from 'react'
-import artistData from '../../shared/data/artistData'
+import Axios from 'axios'
 
 type ArtistsFormInputs = {
   id: string,
@@ -27,17 +27,26 @@ type ContextProviderProps = { children: ReactNode }
 const ArtistStateContext = createContext<Artists | undefined>(undefined)
 const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)
 
-// let initialData: ArtistsFormInputs[]
+const initialState = [{
+  id: '',
+  name: '',
+  city: '',
+  county: '',
+  genre: '',
+  phone: '',
+  websiteLink: '',
+  instagramLink: '',
+  imageLink: '',
+  description: ''
+}]
 
 const ArtistProvider = ({ children }: ContextProviderProps) => {
-  const [artistList, setArtistList] = useState(artistData.artists)
+  const [artistList, setArtistList] = useState(initialState)
 
   useEffect(() => {
-    fetch('artistData.json')
-      .then(response => response.json())
-      .then((data:ArtistsFormInputs[]) => {
-        setArtistList(data)
-      })
+    Axios.get('/api/getArtists').then((response) => {
+      setArtistList(response.data)
+    }).catch((e) => console.log(e))
   }, [])
 
   return (

@@ -1,6 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useArtists, useUpdateArtists } from './ArtistContext'
 import useForm from '../../shared/hooks/useForm'
 import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds } from './models/ArtistFormInputs'
 import {
@@ -9,14 +8,13 @@ import {
   TextAreaField,
   Form
 } from '../../shared/components/FormTemplate'
+import Axios from 'axios'
 
 // NOTE: I can do schema here?
 
 const CreateArtistForm = () => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
-  const { artistList } = useArtists()
-  const setArtistList = useUpdateArtists()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [artistFormInputs, setArtistFormInputs] = useState({
@@ -44,12 +42,22 @@ const CreateArtistForm = () => {
     const errors = handleSubmit()
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
-      setIsSubmitting(true)
-      artistFormInputs.id = (artistList.length + 1).toString() // NOTE: Crude, backend implementation with DB is ideal, I am doing this a temp
-      setArtistList(artistList.slice().concat(artistFormInputs))
-      setSubmitButtonText('Submit')
       setIsSubmitting(false)
-      history.push('/artists')
+      Axios.post('/api/insertArtist', {
+        name: artistFormInputs.name,
+        city: artistFormInputs.city,
+        county: artistFormInputs.county,
+        genre: artistFormInputs.genre,
+        phone: artistFormInputs.phone,
+        websiteLink: artistFormInputs.websiteLink,
+        instagramLink: artistFormInputs.instagramLink,
+        imageLink: artistFormInputs.imageLink,
+        description: artistFormInputs.description
+      }).then(() => {
+        setSubmitButtonText('Submit')
+        setIsSubmitting(true)
+        history.push('/artists')
+      }).catch((e) => console.log(e))
     }
   }
 

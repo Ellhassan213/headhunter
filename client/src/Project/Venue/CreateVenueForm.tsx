@@ -1,6 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { useVenues, useUpdateVenues } from './VenueContext'
 import useForm from '../../shared/hooks/useForm'
 import { VenueFormInputTestIds, VenueFormInputErrorTestIds } from './models/VenueFormInputs'
 import {
@@ -9,14 +8,13 @@ import {
   TextAreaField,
   Form
 } from '../../shared/components/FormTemplate'
+import Axios from 'axios'
 
 const CreateVenueForm = () => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const { venueList } = useVenues()
-  const setVenueList = useUpdateVenues()
   const [venueFormInputs, setVenueFormInputs] = useState({
     id: '',
     name: '',
@@ -40,12 +38,20 @@ const CreateVenueForm = () => {
     const errors = handleSubmit()
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
-      setIsSubmitting(true)
-      venueFormInputs.id = (venueList.length + 1).toString()
-      setVenueList(venueList.slice().concat(venueFormInputs))
-      setSubmitButtonText('Submit')
       setIsSubmitting(false)
-      history.push('/venues')
+      Axios.post('/api/insertVenue', {
+        name: venueFormInputs.name,
+        city: venueFormInputs.city,
+        county: venueFormInputs.county,
+        address: venueFormInputs.address,
+        phone: venueFormInputs.phone,
+        imageLink: venueFormInputs.imageLink,
+        description: venueFormInputs.description
+      }).then(() => {
+        setSubmitButtonText('Submit')
+        setIsSubmitting(true)
+        history.push('/venues')
+      }).catch((e) => console.log(e))
     }
   }
 

@@ -5,8 +5,8 @@ import React, {
   ReactNode,
   createContext
 } from 'react'
-import venueData from '../../shared/data/venueData'
 import { VenuesFormInputs } from './models/VenueFormInputs'
+import Axios from 'axios'
 
 type Venues = { venueList: VenuesFormInputs[] }
 type SetVenues = (setVenueList: VenuesFormInputs[]) => void
@@ -15,13 +15,24 @@ type ContextProviderProps = { children: ReactNode }
 const VenueStateContext = createContext<Venues | undefined>(undefined)
 const VenueDispatchContext = createContext<SetVenues | undefined>(undefined)
 
+const initialState = [{
+  id: '',
+  name: '',
+  city: '',
+  county: '',
+  address: '',
+  phone: '',
+  imageLink: '',
+  description: ''
+}]
+
 const VenueProvider = ({ children }: ContextProviderProps) => {
-  const [venueList, setVenueList] = useState(venueData.venues)
+  const [venueList, setVenueList] = useState(initialState)
 
   useEffect(() => {
-    fetch('venueData.json')
-      .then(response => response.json())
-      .then(data => setVenueList(data))
+    Axios.get('/api/getVenues').then((response) => {
+      setVenueList(response.data)
+    }).catch((e) => console.log(e))
   }, [])
 
   return (

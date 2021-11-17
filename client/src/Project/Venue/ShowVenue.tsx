@@ -17,12 +17,9 @@ const ShowVenue = () => {
               <div className="show-details">
                 <h1 className="monospace">{venue.name}</h1>
                 <p className="subtitle">ID: {venue.id}</p>
-                {/* <div className="genres"> <span className="genre">{venue.genre}</span> </div> */}
                 <p> <i className="ri-earth-line"></i> {venue.city}, {venue.county}</p>
                 <p><i className="ri-phone-fill"></i> {venue.phone}</p>
                 <p><i className="ri-home-heart-fill"></i> {venue.address}</p>
-                {/* <p><i className="ri-links-fill"></i> <a className="page-link" href={venue.websiteLink} rel="noopener noreferrer" target="_blank">{venue.websiteLink}</a></p>
-                <p><i className="ri-instagram-line"></i> <a className="page-link" href={venue.instagramLink} rel="noopener noreferrer" target="_blank">{venue.instagramLink}</a></p> */}
                 <div className="description">
                   <p className="description-lead">About us</p>
                   <div className="description-detail">
