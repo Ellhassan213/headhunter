@@ -8,7 +8,7 @@ const Artists = () => {
   const setArtistList = useUpdateArtists()
 
   useEffect(() => {
-    Axios.get('/api/getArtists').then((response) => {
+    Axios.get('https://headhunter-deploy.herokuapp.com/api/getArtists').then((response) => {
       setArtistList(response.data)
     }).catch((e) => console.log(e))
   }, [])

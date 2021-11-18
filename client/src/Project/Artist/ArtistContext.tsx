@@ -44,7 +44,7 @@ const ArtistProvider = ({ children }: ContextProviderProps) => {
   const [artistList, setArtistList] = useState(initialState)
 
   useEffect(() => {
-    Axios.get('/api/getArtists').then((response) => {
+    Axios.get('https://headhunter-deploy.herokuapp.com/api/getArtists').then((response) => {
       setArtistList(response.data)
     }).catch((e) => console.log(e))
   }, [])

@@ -11,7 +11,9 @@ const Venues = () => {
   const groupedByCity = _.chain(venueList).groupBy('city').value()
 
   useEffect(() => {
-    Axios.get('/api/getVenues').then((response) => {
+    Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
+      console.log('got venues')
+      console.log(response.data)
       setVenueList(response.data)
     }).catch((e) => console.log(e))
   }, [])

@@ -43,7 +43,7 @@ const CreateArtistForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      Axios.post('/api/insertArtist', {
+      Axios.post('https://headhunter-deploy.herokuapp.com/api/insertArtist', {
         name: artistFormInputs.name,
         city: artistFormInputs.city,
         county: artistFormInputs.county,
