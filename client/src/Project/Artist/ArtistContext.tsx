@@ -5,20 +5,8 @@ import React, {
   ReactNode,
   createContext
 } from 'react'
+import { ArtistsFormInputs } from './models/ArtistFormInputs'
 import Axios from 'axios'
-
-type ArtistsFormInputs = {
-  id: string,
-  name: string,
-  city: string,
-  county: string,
-  genre: string,
-  phone: string,
-  imageLink: string,
-  websiteLink: string,
-  instagramLink: string,
-  description: string
-}
 
 type Artists = { artistList: ArtistsFormInputs[] }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void

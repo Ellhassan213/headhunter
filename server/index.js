@@ -1,20 +1,20 @@
 const express = require('express')
-const mysql = require('mysql')
 const cors = require('cors')
-const app = express()
+const db = require('./config/db')
 
-const db = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  password: 'Password213.',
-  database: 'headhunterDB'
-})
+const app = express()
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({
   extended: true
 }))
+
+const PORT = 3001
+
+app.get("/api", (req, res) => {
+  res.json({ message: "Hello from heroku!" });
+});
 
 app.post('/api/insertVenue', (req, res) => {
   const name = req.body.name
@@ -34,7 +34,9 @@ app.post('/api/insertVenue', (req, res) => {
 app.get('/api/getVenues', (req, res) => {
   const sqlSelect = "SELECT * FROM venues;"
   db.query(sqlSelect, (err, result) => {
+    if (err) throw err
     res.send(result)
+    console.log(result)
   })
 })
 
@@ -62,6 +64,6 @@ app.get('/api/getArtists', (req, res) => {
   })
 })
 
-app.listen(3001, () => {
-  console.log('running on port 3001')
+app.listen(process.env.PORT || PORT, () => {
+  console.log(`running on port ${PORT}`)
 })

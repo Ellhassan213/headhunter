@@ -7,12 +7,12 @@ type Id = { venueId: string }
 const ShowVenue = () => {
   const { venueId } = useParams<Id>()
   const { venueList } = useVenues()
-  const isVenue = venueList.filter(obj => obj.id.toString() === venueId)
-  const venue = venueList[parseInt(venueId) - 1]
+  const venue = venueList.filter(obj => obj.id.toString() === venueId)[0]
+
   return (
     <div className='standard-page'>
       {
-        isVenue.length > 0
+        Object.keys(venue).length > 0
           ? <div className="basic-details-container">
               <div className="show-details">
                 <h1 className="monospace">{venue.name}</h1>

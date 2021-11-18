@@ -7,12 +7,12 @@ type Id = { artistId: string }
 const ShowArtist = () => {
   const { artistId } = useParams<Id>()
   const { artistList } = useArtists()
-  const isArtist = artistList.filter((obj) => obj.id.toString() === artistId)
-  const artist = artistList[parseInt(artistId) - 1]
+  const artist = artistList.filter(obj => obj.id.toString() === artistId)[0]
+
   return (
     <div className='standard-page'>
       {
-        isArtist.length > 0
+        Object.keys(artist).length > 0
           ? <div className="basic-details-container">
               <div className="show-details">
                 <h1 className="monospace">{artist.name}</h1>

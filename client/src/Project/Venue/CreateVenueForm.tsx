@@ -1,5 +1,5 @@
 import React, { SyntheticEvent, useState } from 'react'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import useForm from '../../shared/hooks/useForm'
 import { VenueFormInputTestIds, VenueFormInputErrorTestIds } from './models/VenueFormInputs'
 import {
@@ -11,7 +11,7 @@ import {
 import Axios from 'axios'
 
 const CreateVenueForm = () => {
-  // const history = useHistory()
+  const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -50,7 +50,7 @@ const CreateVenueForm = () => {
       }).then(() => {
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
-        // history.push('/venues')
+        history.push('/venues')
       }).catch((e) => console.log(e))
     }
   }
