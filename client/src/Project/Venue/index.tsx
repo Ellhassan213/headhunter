@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useVenues, useUpdateVenues } from './VenueContext'
 import _ from 'lodash'
-import Axios from 'axios'
+// import Axios from 'axios'
 
 const Venues = () => {
   const { venueList } = useVenues()
@@ -10,12 +10,19 @@ const Venues = () => {
 
   const groupedByCity = _.chain(venueList).groupBy('city').value()
 
+  // useEffect(() => {
+  //   Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
+  //     console.log('got venues')
+  //     console.log(response.data)
+  //     setVenueList(response.data)
+  //   }).catch((e) => console.log(e))
+  // }, [])
+
   useEffect(() => {
-    Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
-      console.log('got venues')
-      console.log(response.data)
-      setVenueList(response.data)
-    }).catch((e) => console.log(e))
+    fetch('https://headhunter-deploy.herokuapp.com/api/getVenues')
+      .then(response => response.json())
+      .then(data => setVenueList(data))
+      .catch(e => console.log(e))
   }, [])
 
   return (
