@@ -12,8 +12,6 @@ const Venues = () => {
 
   useEffect(() => {
     Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
-      console.log('got venues')
-      console.log(response.data)
       setVenueList(response.data)
     }).catch((e) => console.log(e))
   }, [])
