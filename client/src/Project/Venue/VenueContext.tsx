@@ -30,7 +30,8 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
   const [venueList, setVenueList] = useState(initialState)
 
   useEffect(() => {
-    Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
+    // https://headhunter-deploy.herokuapp.com
+    Axios.get('/api/getVenues').then((response) => {
       setVenueList(response.data)
     }).catch((e) => console.log(e))
   }, [])

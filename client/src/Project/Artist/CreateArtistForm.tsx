@@ -9,6 +9,7 @@ import {
   Form
 } from '../../shared/components/FormTemplate'
 import Axios from 'axios'
+import { useArtists, useUpdateArtists } from './ArtistContext'
 
 // NOTE: I can do schema here?
 
@@ -29,6 +30,8 @@ const CreateArtistForm = () => {
     instagramLink: '',
     description: ''
   })
+  const { artistList } = useArtists()
+  const setArtistList = useUpdateArtists()
 
   const setInput = (name: string, value: string) => {
     setArtistFormInputs({
@@ -43,7 +46,8 @@ const CreateArtistForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      Axios.post('https://headhunter-deploy.herokuapp.com/api/insertArtist', {
+      // https://headhunter-deploy.herokuapp.com
+      Axios.post('/api/insertArtist', {
         name: artistFormInputs.name,
         city: artistFormInputs.city,
         county: artistFormInputs.county,
@@ -53,7 +57,9 @@ const CreateArtistForm = () => {
         instagramLink: artistFormInputs.instagramLink,
         imageLink: artistFormInputs.imageLink,
         description: artistFormInputs.description
-      }).then(() => {
+      }).then((response) => {
+        const insertID = response.data.insertId
+        setArtistList([...artistList, { ...artistFormInputs, id: insertID }])
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/artists')

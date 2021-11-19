@@ -1,21 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom'
-import { useVenues, useUpdateVenues } from './VenueContext'
+import { useVenues } from './VenueContext'
 import _ from 'lodash'
-import Axios from 'axios'
 
 const Venues = () => {
   const { venueList } = useVenues()
-  const setVenueList = useUpdateVenues()
-
   const groupedByCity = _.chain(venueList).groupBy('city').value()
-
-  useEffect(() => {
-    Axios.get('https://headhunter-deploy.herokuapp.com/api/getVenues').then((response) => {
-      setVenueList(response.data)
-    }).catch((e) => console.log(e))
-  }, [])
-
   return (
     <div className="standard-page">
       {Object.keys(groupedByCity).map(city => {

@@ -9,6 +9,7 @@ import {
   Form
 } from '../../shared/components/FormTemplate'
 import Axios from 'axios'
+import { useVenues, useUpdateVenues } from './VenueContext'
 
 const CreateVenueForm = () => {
   const history = useHistory()
@@ -25,6 +26,8 @@ const CreateVenueForm = () => {
     imageLink: '',
     description: ''
   })
+  const { venueList } = useVenues()
+  const setVenueList = useUpdateVenues()
 
   const setInput = (name: string, value: string) => {
     setVenueFormInputs({
@@ -39,7 +42,8 @@ const CreateVenueForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      Axios.post('https://headhunter-deploy.herokuapp.com/api/insertVenue', {
+      // https://headhunter-deploy.herokuapp.com
+      Axios.post('/api/insertVenue', {
         name: venueFormInputs.name,
         city: venueFormInputs.city,
         county: venueFormInputs.county,
@@ -47,7 +51,9 @@ const CreateVenueForm = () => {
         phone: venueFormInputs.phone,
         imageLink: venueFormInputs.imageLink,
         description: venueFormInputs.description
-      }).then(() => {
+      }).then((response) => {
+        const insertID = response.data.insertId
+        setVenueList([...venueList, { ...venueFormInputs, id: insertID }])
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/venues')
