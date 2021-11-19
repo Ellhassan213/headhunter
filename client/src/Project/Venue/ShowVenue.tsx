@@ -12,7 +12,7 @@ const ShowVenue = () => {
   return (
     <div className='standard-page'>
       {
-        Object.keys(venue).length > 0
+        venue !== undefined
           ? <div className="basic-details-container">
               <div className="show-details">
                 <h1 className="monospace">{venue.name}</h1>
