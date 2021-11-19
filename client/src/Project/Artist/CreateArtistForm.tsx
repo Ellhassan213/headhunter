@@ -11,8 +11,6 @@ import {
 import Axios from 'axios'
 import { useArtists, useUpdateArtists } from './ArtistContext'
 
-// NOTE: I can do schema here?
-
 const CreateArtistForm = () => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
@@ -46,7 +44,6 @@ const CreateArtistForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      // https://headhunter-deploy.herokuapp.com
       Axios.post('/api/insertArtist', {
         name: artistFormInputs.name,
         city: artistFormInputs.city,

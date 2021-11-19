@@ -6,14 +6,15 @@ type Id = { artistId: string }
 
 const ShowArtist = () => {
   const { artistId } = useParams<Id>()
-  const { artistList } = useArtists()
-  const artist = artistList.filter(obj => obj.id.toString() === artistId)[0]
+  const { isDataLoading, artistList } = useArtists()
+  const artist = artistList?.filter(obj => obj.id.toString() === artistId)[0]
 
   return (
     <div className='standard-page'>
       {
-        Object.keys(artist).length > 0
-          ? <div className="basic-details-container">
+        !isDataLoading
+          ? artist
+            ? <div className="basic-details-container">
               <div className="show-details">
                 <h1 className="monospace">{artist.name}</h1>
                 <p className="subtitle">ID: {artist.id}</p>
@@ -33,7 +34,8 @@ const ShowArtist = () => {
                 <img src={artist.imageLink} alt="Artist Image" />
               </div>
             </div>
-          : <p>Not Found</p>
+            : <h3>{`Artist with ID ${artistId} not found`}</h3>
+          : <h3>Fetcting data...</h3>
       }
     </div>
   )

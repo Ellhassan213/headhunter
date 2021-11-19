@@ -8,38 +8,28 @@ import React, {
 import { ArtistsFormInputs } from './models/ArtistFormInputs'
 import Axios from 'axios'
 
-type Artists = { artistList: ArtistsFormInputs[] }
+type Artists = { artistList: ArtistsFormInputs[], isDataLoading: boolean }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
 type ContextProviderProps = { children: ReactNode }
 
 const ArtistStateContext = createContext<Artists | undefined>(undefined)
 const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)
 
-const initialState = [{
-  id: '',
-  name: '',
-  city: '',
-  county: '',
-  genre: '',
-  phone: '',
-  websiteLink: '',
-  instagramLink: '',
-  imageLink: '',
-  description: ''
-}]
+let initialState: ArtistsFormInputs[]
 
 const ArtistProvider = ({ children }: ContextProviderProps) => {
   const [artistList, setArtistList] = useState(initialState)
+  const [isDataLoading, setIsDataLoading] = useState(true)
 
   useEffect(() => {
-    // https://headhunter-deploy.herokuapp.com
     Axios.get('/api/getArtists').then((response) => {
       setArtistList(response.data)
+      setIsDataLoading(false)
     }).catch((e) => console.log(e))
   }, [])
 
   return (
-    <ArtistStateContext.Provider value={{ artistList }}>
+    <ArtistStateContext.Provider value={{ artistList, isDataLoading }}>
       <ArtistDispatchContext.Provider value={setArtistList}>{children}</ArtistDispatchContext.Provider>
     </ArtistStateContext.Provider>
   )

@@ -42,7 +42,6 @@ const CreateVenueForm = () => {
     if (errors === 0) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      // https://headhunter-deploy.herokuapp.com
       Axios.post('/api/insertVenue', {
         name: venueFormInputs.name,
         city: venueFormInputs.city,
