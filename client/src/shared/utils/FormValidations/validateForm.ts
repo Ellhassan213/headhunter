@@ -1,19 +1,16 @@
+import _ from 'lodash'
+
 type ErrorTypes = {
   [key: string]: string
 }
 
-const validateForm = (formInputsErrors: ErrorTypes) => {
-  let errors = 0
-  if (Object.keys(formInputsErrors).length === 0) {
-    errors = 1
-  } else {
-    for (const item of Object.keys(formInputsErrors)) {
-      if (formInputsErrors[item]?.length > 0) {
-        errors += 1
-      }
-    }
-  }
-  return errors
+const validateForm = (formInputs: {}, formInputsErrors: ErrorTypes) => {
+  const filteredFormInputs = _.omit(formInputs, ['id'])
+  const isFormEmpty = _.values(filteredFormInputs).some(_.isEmpty)
+  const isFormErrorsEmpty = _.values(formInputsErrors).every(_.isEmpty)
+  const isFormValid = !isFormEmpty && isFormErrorsEmpty
+
+  return isFormValid
 }
 
 export default validateForm

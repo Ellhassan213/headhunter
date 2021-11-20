@@ -38,8 +38,8 @@ const CreateVenueForm = () => {
 
   const createVenue = (event: SyntheticEvent) => {
     event.preventDefault()
-    const errors = handleSubmit()
-    if (errors === 0) {
+    const isFormValid = handleSubmit(venueFormInputs)
+    if (isFormValid) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
       Axios.post('/api/insertVenue', {

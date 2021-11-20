@@ -21,8 +21,8 @@ const useForm = () => {
     setFormInputsErrors({ ...formInputsErrors, [name]: errorMessage })
   }
 
-  const handleSubmit = () => {
-    const errors = validateForm(formInputsErrors)
+  const handleSubmit = (formInputs: {}) => {
+    const errors = validateForm(formInputs, formInputsErrors)
     return errors
   }
   return { formInputsErrors, handleChange, handleBlur, handleSubmit }

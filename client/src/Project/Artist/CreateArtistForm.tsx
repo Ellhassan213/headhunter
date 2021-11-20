@@ -40,8 +40,8 @@ const CreateArtistForm = () => {
 
   const createArtist = (event: SyntheticEvent) => {
     event.preventDefault()
-    const errors = handleSubmit()
-    if (errors === 0) {
+    const isFormValid = handleSubmit(artistFormInputs)
+    if (isFormValid) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
       Axios.post('/api/insertArtist', {
