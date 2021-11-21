@@ -1,16 +1,41 @@
 import React from 'react'
-import { Router } from 'react-router-dom'
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
 import CreateVenue from './CreateVenue'
-import Venues from '.'
 import { VenueFormInputErrorTestIds, VenueFormInputTestIds } from './models/VenueFormInputs'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useUpdateVenues, useVenues, VenueProvider } from './VenueContext'
 import venueData from '../../shared/data/venueData'
 
 
-afterAll(cleanup)
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
+
+const getVenueHandler = rest.get('/api/getVenues', (req, res, ctx) => {
+  return res (
+    ctx.json(venueData.venues)
+  )
+})
+
+const postVenueHandler = rest.post('/api/insertVenue', (req, res, ctx) => {
+  const venue = req.body
+  return res(ctx.json(venue))
+})
+
+const handlers = [getVenueHandler, postVenueHandler]
+
+const server = setupServer(...handlers)
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterEach(() => server.resetHandlers())
+
+afterAll(() => {
+  server.close()
+  cleanup
+})
+
 
 describe('<CreateVenue />', () => {  
   it('renders name field and its label', () => {
@@ -97,66 +122,7 @@ describe('<CreateVenue />', () => {
     expect(screen.queryByTestId(VenueFormInputErrorTestIds.ImageLink)).toBeInTheDocument()
     expect(screen.queryByTestId(VenueFormInputErrorTestIds.ImageLink)?.textContent).toBe(errorMessage)
   })
-
-  it('it successfully creates venue and then routes the venue list page', () => {
-    const history = createMemoryHistory()
-    
-    render(
-        <Router history={history}>
-          <VenueProvider> <CreateVenue /> </VenueProvider>
-        </Router>
-    )
-
-    const nameInput = screen.getByTestId(VenueFormInputTestIds.Name) as HTMLInputElement
-    fireEvent.change(nameInput, { target: { value: 'Lawal' } })
-    fireEvent.blur(nameInput)
-
-    const cityInput = screen.getByTestId(VenueFormInputTestIds.City) as HTMLInputElement
-    fireEvent.change(cityInput, { target: { value: 'London' } })
-    fireEvent.blur(cityInput)
-
-    const countyInput = screen.getByTestId(VenueFormInputTestIds.County) as HTMLInputElement
-    fireEvent.change(countyInput, { target: { value: 'South' } })
-    fireEvent.blur(countyInput)  
-
-    const addressInput = screen.getByTestId(VenueFormInputTestIds.Address) as HTMLInputElement
-    fireEvent.change(addressInput, { target: { value: 'South Side Apartment' } })
-    fireEvent.blur(addressInput)  
-
-    const phoneInput = screen.getByTestId(VenueFormInputTestIds.Phone) as HTMLInputElement
-    fireEvent.change(phoneInput, { target: { value: '08030303030' } })
-    fireEvent.blur(phoneInput)  
-
-    const imageLinkInput = screen.getByTestId(VenueFormInputTestIds.ImageLink) as HTMLInputElement
-    fireEvent.change(imageLinkInput, { target: { value: 'https://image.com' } })
-    fireEvent.blur(imageLinkInput) 
-
-    const descriptionInput = screen.getByTestId(VenueFormInputTestIds.Description) as HTMLInputElement
-    fireEvent.change(descriptionInput, { target: { value: 'Bla Bla Bla...' } })
-    fireEvent.blur(descriptionInput)
-
-    // expect(screen.getByText('Submit')).toBeInTheDocument()
-    // fireEvent.click(screen.getByText('Submit'))
-    
-    // expect(history.length).toBe(2)
-    // expect(history.location.pathname).toBe('/venues')
-  })
 })
-
-// describe('<Venues />', () => {
-//   it('renders the venues page successfully and lists venues', () => {
-//     const history = createMemoryHistory()
-//     render(
-//       <Router history={history}>
-//         <VenueProvider> <Venues /> </VenueProvider>
-//       </Router>
-//     )
-//     expect(screen.getByText(venueData.venues[0].name)).toBeInTheDocument()
-//     expect(screen.getByText(venueData.venues[1].name)).toBeInTheDocument()
-//     expect(screen.getByText(venueData.venues[2].name)).toBeInTheDocument()
-//     expect(screen.getByText(venueData.venues[3].name)).toBeInTheDocument()
-//   })
-// })
 
 describe('useUpdateVenues', () => {
   it('calls the useUpdateVenues with the correct data', () => {
@@ -186,4 +152,3 @@ describe('useUpdateVenues', () => {
   })
 })
 
-// Note: I can do alot more tests

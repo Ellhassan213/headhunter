@@ -7,6 +7,7 @@ import React, {
 } from 'react'
 import { ArtistsFormInputs } from './models/ArtistFormInputs'
 import Axios from 'axios'
+import useMountedState from '../../shared/hooks/useMountedState'
 
 type Artists = { artistList: ArtistsFormInputs[], isDataLoading: boolean }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
@@ -18,15 +19,18 @@ const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)
 let initialState: ArtistsFormInputs[]
 
 const ArtistProvider = ({ children }: ContextProviderProps) => {
+  const isMounted = useMountedState()
   const [artistList, setArtistList] = useState(initialState)
   const [isDataLoading, setIsDataLoading] = useState(true)
 
   useEffect(() => {
     Axios.get('/api/getArtists').then((response) => {
-      setArtistList(response.data)
-      setIsDataLoading(false)
+      if (isMounted()) {
+        setArtistList(response.data)
+        setIsDataLoading(false)
+      }
     }).catch((e) => console.log(e))
-  }, [])
+  }, [isMounted])
 
   return (
     <ArtistStateContext.Provider value={{ artistList, isDataLoading }}>

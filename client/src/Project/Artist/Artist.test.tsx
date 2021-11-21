@@ -1,16 +1,41 @@
 import React from 'react'
-import { Router } from 'react-router-dom'
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
-import { createMemoryHistory } from 'history'
 import CreateArtist from './CreateArtist'
-import Artists from '.'
 import { ArtistFormInputErrorTestIds, ArtistFormInputTestIds } from './models/ArtistFormInputs'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useUpdateArtists, useArtists, ArtistProvider } from './ArtistContext'
 import artistData from '../../shared/data/artistData'
 
+import { rest } from 'msw'
+import { setupServer } from 'msw/node'
 
-afterAll(cleanup)
+const getArtistsHandler = rest.get('/api/getArtists', (req, res, ctx) => {
+  return res(ctx.json(artistData.artists))
+})
+
+const postArtistHandler = rest.post('/api/insertArtist', (req, res, ctx) => {
+  const artist = req.body
+  return res(ctx.json(artist))
+})
+
+
+const handlers = [getArtistsHandler, postArtistHandler]
+
+const server = setupServer(...handlers)
+
+beforeAll(() => {
+  server.listen()
+})
+
+afterEach(() => {
+  server.resetHandlers(),
+  cleanup
+})
+
+afterAll(() => {
+  server.close(),
+  cleanup
+})
 
 describe('<CreateArtist />', () => {  
   it('renders name field and its label', () => {
@@ -97,74 +122,7 @@ describe('<CreateArtist />', () => {
     expect(screen.queryByTestId(ArtistFormInputErrorTestIds.ImageLink)).toBeInTheDocument()
     expect(screen.queryByTestId(ArtistFormInputErrorTestIds.ImageLink)?.textContent).toBe(errorMessage)
   })
-
-  it('it successfully creates artist and then routes the artist list page', () => {
-    const history = createMemoryHistory()
-    
-    render(
-        <Router history={history}>
-          <ArtistProvider> <CreateArtist /> </ArtistProvider>
-        </Router>
-    )
-
-    const nameInput = screen.getByTestId(ArtistFormInputTestIds.Name) as HTMLInputElement
-    fireEvent.change(nameInput, { target: { value: 'Lawal' } })
-    fireEvent.blur(nameInput)
-
-    const cityInput = screen.getByTestId(ArtistFormInputTestIds.City) as HTMLInputElement
-    fireEvent.change(cityInput, { target: { value: 'London' } })
-    fireEvent.blur(cityInput)
-
-    const countyInput = screen.getByTestId(ArtistFormInputTestIds.County) as HTMLInputElement
-    fireEvent.change(countyInput, { target: { value: 'South' } })
-    fireEvent.blur(countyInput)
-  
-    const genreInput = screen.getByTestId(ArtistFormInputTestIds.Genre) as HTMLInputElement
-    fireEvent.change(genreInput, { target: { value: 'Jazz' } })
-    fireEvent.blur(genreInput)  
-
-    const phoneInput = screen.getByTestId(ArtistFormInputTestIds.Phone) as HTMLInputElement
-    fireEvent.change(phoneInput, { target: { value: '08030303030' } })
-    fireEvent.blur(phoneInput)  
-
-    const instagramInput = screen.getByTestId(ArtistFormInputTestIds.InstagramLink) as HTMLInputElement
-    fireEvent.change(instagramInput, { target: { value: 'https://instagram.com' } })
-    fireEvent.blur(instagramInput)  
-
-    const imageLinkInput = screen.getByTestId(ArtistFormInputTestIds.ImageLink) as HTMLInputElement
-    fireEvent.change(imageLinkInput, { target: { value: 'https://image.com' } })
-    fireEvent.blur(imageLinkInput)
-
-    const websiteLinkInput = screen.getByTestId(ArtistFormInputTestIds.WebsiteLink) as HTMLInputElement
-    fireEvent.change(websiteLinkInput, { target: { value: 'https://website.com' } })
-    fireEvent.blur(websiteLinkInput) 
-
-    const descriptionInput = screen.getByTestId(ArtistFormInputTestIds.Description) as HTMLInputElement
-    fireEvent.change(descriptionInput, { target: { value: 'Bla Bla Bla...' } })
-    fireEvent.blur(descriptionInput)
-
-    // expect(screen.getByText('Submit')).toBeInTheDocument()
-    // fireEvent.click(screen.getByText('Submit'))
-    
-    // expect(history.length).toBe(2)
-    // expect(history.location.pathname).toBe('/artists')
-  })
 })
-
-// describe('<Artists />', () => {
-//   it('renders the artists page successfully and lists artists', () => {
-//     const history = createMemoryHistory()
-//     render(
-//       <Router history={history}>
-//         <ArtistProvider> <Artists /> </ArtistProvider>
-//       </Router>
-//     )
-//     expect(screen.getByText(artistData.artists[0].name)).toBeInTheDocument()
-//     expect(screen.getByText(artistData.artists[1].name)).toBeInTheDocument()
-//     expect(screen.getByText(artistData.artists[2].name)).toBeInTheDocument()
-//     expect(screen.getByText(artistData.artists[3].name)).toBeInTheDocument()
-//   })
-// })
 
 describe('useUpdateArtists', () => {
   it('calls the useUpdateArtists with the correct data', () => {
@@ -196,4 +154,3 @@ describe('useUpdateArtists', () => {
   })
 })
 
-// Note: I can do alot more tests

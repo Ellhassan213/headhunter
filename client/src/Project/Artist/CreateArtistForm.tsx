@@ -44,17 +44,9 @@ const CreateArtistForm = () => {
     if (isFormValid) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      Axios.post('/api/insertArtist', {
-        name: artistFormInputs.name,
-        city: artistFormInputs.city,
-        county: artistFormInputs.county,
-        genre: artistFormInputs.genre,
-        phone: artistFormInputs.phone,
-        websiteLink: artistFormInputs.websiteLink,
-        instagramLink: artistFormInputs.instagramLink,
-        imageLink: artistFormInputs.imageLink,
-        description: artistFormInputs.description
-      }).then((response) => {
+      Axios.post('/api/insertArtist',
+        artistFormInputs
+      ).then((response) => {
         const insertID = response.data.insertId
         setArtistList([...artistList, { ...artistFormInputs, id: insertID }])
         setSubmitButtonText('Submit')

@@ -42,15 +42,9 @@ const CreateVenueForm = () => {
     if (isFormValid) {
       setSubmitButtonText('Submitting...')
       setIsSubmitting(false)
-      Axios.post('/api/insertVenue', {
-        name: venueFormInputs.name,
-        city: venueFormInputs.city,
-        county: venueFormInputs.county,
-        address: venueFormInputs.address,
-        phone: venueFormInputs.phone,
-        imageLink: venueFormInputs.imageLink,
-        description: venueFormInputs.description
-      }).then((response) => {
+      Axios.post('/api/insertVenue',
+        venueFormInputs
+      ).then((response) => {
         const insertID = response.data.insertId
         setVenueList([...venueList, { ...venueFormInputs, id: insertID }])
         setSubmitButtonText('Submit')
