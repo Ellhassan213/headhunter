@@ -49,8 +49,11 @@ The main rule to follow: **Files from one module can only import from ancestor f
 
 | Folder or File | Description |
 | -------------- | ----------- |
-| `src/index.tsx`   | Entry File. This is where we render the App into the root DOM node |
 | `public/index.html` | The HTML in the App where all scripts and styles are injected |
+| `src/index.tsx`   | Entry File. This is where we render the App into the root DOM node |
+| `src/App` | Application routes with global components always need to be mounted irrespective of routes. E.g. Header and Footer |
+| `src/Project` | This is the project module where we can find domain specific code base such as the Venues, Artists, Decorators etc. |
+| `src/shared` | Here we have components, constants and data, utils, hooks and some type models. These can be imported and used by any module |
 
 ## Learn More
 

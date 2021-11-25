@@ -10,12 +10,6 @@ app.use(express.urlencoded({
   extended: true
 }))
 
-const PORT = 3001
-
-app.get("/api", (req, res) => {
-  res.json({ message: "Hello from heroku!" });
-});
-
 app.post('/api/insertVenue', (req, res) => {
   const name = req.body.name
   const city = req.body.city
@@ -64,6 +58,8 @@ app.get('/api/getArtists', (req, res) => {
   })
 })
 
-app.listen(process.env.PORT || PORT, () => {
+const PORT = process.env.PORT || 3001
+
+app.listen(PORT, () => {
   console.log(`running on port ${PORT}`)
 })
