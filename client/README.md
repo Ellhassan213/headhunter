@@ -49,7 +49,8 @@ The main rule to follow: **Files from one module can only import from ancestor f
 
 | Folder or File | Description |
 | -------------- | ----------- |
-| src/index.js   | kdhwdo      |
+| `src/index.tsx`   | Entry File. This is where we render the App into the root DOM node |
+| `public/index.html` | The HTML in the App where all scripts and styles are injected |
 
 ## Learn More
 
