@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import imageData from './mainPageImageData'
+import { mainPageImageData } from '../index'
 
 interface ImageData {
   id: string,
@@ -10,7 +10,7 @@ interface ImageData {
 }
 
 const MainPage = () => {
-  const images: ImageData[] = imageData.images
+  const images: ImageData[] = mainPageImageData.images
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   const goToPrevious = () => {
