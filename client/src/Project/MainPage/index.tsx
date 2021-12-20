@@ -27,30 +27,21 @@ const MainPage = () => {
 
   return (
     <div className="standard-page">
-      <h1 className='monospace'>Head Hunter</h1>
-      <div className='slider'>
-        <div className='left'>
-          <i className='ri-arrow-left-s-fill' onClick={goToPrevious}></i>
-        </div>
-        <div className='center'>
-          {images.map((img, index) => {
-            return (
-              <div key={`${img.id}${index}`} className={index === currentImageIndex ? 'imageActive' : 'imageNotActive'}>
-                {index === currentImageIndex && (
-                    <>
-                    <Link to={img.pagePath}>
-                      <img className='image' src={img.url} alt='Current Image' />
-                      <div className='image-text'>{img.caption}</div>
-                    </Link>
-                    </>
-                )}
-              </div>
-            )
-          })}
-        </div>
-        <div className='right'>
-          <i className='ri-arrow-right-s-fill' onClick={goToNext}></i>
-        </div>
+      <div className="slideshow-container">
+        <h1 className='monospace'>Head Hunter</h1>
+        {images.map((img, index) => {
+          return (
+            <div key={`${img.id}${index}`} className={index === currentImageIndex ? 'slideActive fade' : 'slideNotActive fade'}>
+              <Link to={img.pagePath}>
+                <div className="slide-numbertext">{img.id} / {images.length}</div>
+                <img className="slide-image" src={img.url} alt="Current Image"/>
+                <div className="slide-text">{img.caption}</div>
+              </Link>
+            </div>
+          )
+        })}
+        <a className="slide-prev" onClick={goToPrevious}> &#10094;</a>
+        <a className="slide-next" onClick={goToNext}> &#10095;</a>
       </div>
     </div>
   )
