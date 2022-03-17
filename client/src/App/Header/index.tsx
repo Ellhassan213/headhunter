@@ -1,13 +1,14 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { StyledHeader, StyledHeaderLink, StyledHeaderIcon } from './styles'
+import { GiDiamondsSmile } from 'react-icons/gi'
 
 const Header = () => {
   return (
-    <header>
-        <Link to="/" className="header-link"> <i className="ri-emotion-happy-fill"></i> </Link>
-        <Link to="/venues" className="header-link"> <h3>Venues</h3> </Link>
-        <Link to="/artists" className="header-link"> <h3>Artists</h3> </Link>
-    </header>
+    <StyledHeader>
+        <StyledHeaderIcon to="/"> <GiDiamondsSmile /> </StyledHeaderIcon>
+        <StyledHeaderLink to="/venues"> <h3>Venues</h3> </StyledHeaderLink>
+        <StyledHeaderLink to="/artists"> <h3>Artists</h3> </StyledHeaderLink>
+    </StyledHeader>
   )
 }
 

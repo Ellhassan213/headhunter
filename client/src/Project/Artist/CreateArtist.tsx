@@ -1,12 +1,13 @@
 import React from 'react'
 import CreateArtistForm from './CreateArtistForm'
+import { CreateArtistContainer } from './styles'
 
 const CreateArtist = () => {
   return (
-    <div className="standard-page">
+    <CreateArtistContainer>
       <h3>List a new artist</h3>
       <CreateArtistForm />
-    </div>
+    </CreateArtistContainer>
   )
 }
 

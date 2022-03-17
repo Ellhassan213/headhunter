@@ -1,6 +1,16 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { mainPageImageData } from '../index'
+import {
+  MainPageContainer,
+  SlideShow,
+  Slide,
+  SlideNumber,
+  SlideText,
+  SlideImage,
+  ArrowNext,
+  ArrowPrev
+} from './styles'
 
 interface ImageData {
   id: string,
@@ -26,24 +36,24 @@ const MainPage = () => {
   }
 
   return (
-    <div className="standard-page">
-      <div className="slideshow-container">
-        <h1 className='monospace'>Head Hunter</h1>
+    <MainPageContainer>
+      <SlideShow>
+        <h1>Head Hunter</h1>
         {images.map((img, index) => {
           return (
-            <div key={`${img.id}${index}`} className={index === currentImageIndex ? 'slideActive fade' : 'slideNotActive fade'}>
+            <Slide key={`${img.id}${index}`} displayFormat={index === currentImageIndex ? 'block' : 'none'}>
               <Link to={img.pagePath}>
-                <div className="slide-numbertext">{img.id} / {images.length}</div>
-                <img className="slide-image" src={img.url} alt="Current Image"/>
-                <div className="slide-text">{img.caption}</div>
+                <SlideNumber>{img.id} / {images.length}</SlideNumber>
+                <SlideImage className="slide-image" src={img.url} alt="Current Image"/>
+                <SlideText>{img.caption}</SlideText>
               </Link>
-            </div>
+            </Slide>
           )
         })}
-        <a className="slide-prev" onClick={goToPrevious}> &#10094;</a>
-        <a className="slide-next" onClick={goToNext}> &#10095;</a>
-      </div>
-    </div>
+        <ArrowPrev onClick={goToPrevious}> &#10094;</ArrowPrev>
+        <ArrowNext onClick={goToNext}> &#10095;</ArrowNext>
+      </SlideShow>
+    </MainPageContainer>
   )
 }
 
