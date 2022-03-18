@@ -8,7 +8,6 @@ import { FaLink, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
 import {
   PageALink,
   BasicDetail,
-  ShowDetail,
   ShowImage,
   SummaryTitle,
   SummarySubtitle,
@@ -29,10 +28,10 @@ const ShowArtist = () => {
         !isDataLoading
           ? artist
             ? <BasicDetail>
-              <ShowDetail>
+              <div>
                 <SummaryTitle>{artist.name}</SummaryTitle>
                 <SummarySubtitle>ID: {artist.id}</SummarySubtitle>
-                <SummaryGenres> <span>{artist.genre}</span> </SummaryGenres>
+                <SummaryGenres> {artist.genre} </SummaryGenres>
                 <p><GiEarthAfricaEurope /> {artist.city}, {artist.county}</p>
                 <p><BsTelephoneInboundFill /> {artist.phone}</p>
                 <p><FaLink/> <PageALink href={artist.websiteLink} rel="noopener noreferrer" target="_blank">{artist.websiteLink}</PageALink></p>
@@ -41,7 +40,7 @@ const ShowArtist = () => {
                   <p>About me</p>
                   <FaQuoteLeft /> {artist.description} <FaQuoteRight />
                 </SummaryDescription>
-              </ShowDetail>
+              </div>
               <ShowImage>
                 <img src={artist.imageLink} alt="Artist Image" />
               </ShowImage>

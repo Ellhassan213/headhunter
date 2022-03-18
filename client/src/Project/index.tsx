@@ -13,25 +13,25 @@ const mainPageImageData = {
     {
       url: createVenueImage,
       id: '1',
-      caption: 'Add Venue',
+      caption: 'Click to list a venue',
       pagePath: '/create-venue'
     },
     {
       url: createArtistImage,
       id: '2',
-      caption: 'Add Artist',
+      caption: 'Click to list an Artist',
       pagePath: '/create-artist'
     },
     {
       url: seeArtistsImage,
       id: '3',
-      caption: 'Artists',
+      caption: 'Click to see all Artists',
       pagePath: '/artists'
     },
     {
       url: seeVenuesImage,
       id: '4',
-      caption: 'Venues',
+      caption: 'Click to see all Venues',
       pagePath: '/venues'
     }
   ]

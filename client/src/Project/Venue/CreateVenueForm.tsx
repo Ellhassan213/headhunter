@@ -57,6 +57,7 @@ const CreateVenueForm = () => {
   return (
     <>
     <Form onSubmit={createVenue}>
+      <h3>List a new venue</h3>
       <InputField
         fieldTestId={VenueFormInputTestIds.Name}
         fieldErrorTestId={VenueFormInputErrorTestIds.Name}

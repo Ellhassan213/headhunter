@@ -5,7 +5,6 @@ import { ArtistContainer } from './styles'
 const CreateArtist = () => {
   return (
     <ArtistContainer>
-      <h3>List a new artist</h3>
       <CreateArtistForm />
     </ArtistContainer>
   )

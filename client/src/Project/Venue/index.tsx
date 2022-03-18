@@ -1,7 +1,7 @@
 import React from 'react'
 import { useVenues } from './VenueContext'
-import { VenueContainer } from './styles'
-import { PageLink, GroupedListTitle } from '../../shared/utils/BusinessSummaryStyles/styles'
+import { VenueContainer, CityGroup } from './styles'
+import { PageLink } from '../../shared/utils/BusinessSummaryStyles/styles'
 import { BsBuilding } from 'react-icons/bs'
 import _ from 'lodash'
 
@@ -10,15 +10,15 @@ const Venues = () => {
   const list = _.chain(venueList)?.groupBy('city').value()
   return (
     <VenueContainer>
+      <h1>List of venues by City</h1>
+      <br />
       {
         !isDataLoading
           ? list
             ? Object.keys(list).map(city => {
               return (
                 <div key={city}>
-                  <GroupedListTitle>
-                    <h3>{city}</h3>
-                  </GroupedListTitle>
+                  <CityGroup> <h3>{city}</h3> </CityGroup>
                   {list[city].map((venue) => {
                     return (
                       <div key={venue.id}>

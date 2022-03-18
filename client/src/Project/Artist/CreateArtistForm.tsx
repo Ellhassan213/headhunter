@@ -59,6 +59,7 @@ const CreateArtistForm = () => {
   return (
     <>
       <Form onSubmit={createArtist}>
+        <h3>List a new artist</h3>
         <InputField
           fieldTestId={ArtistFormInputTestIds.Name}
           fieldErrorTestId={ArtistFormInputErrorTestIds.Name}

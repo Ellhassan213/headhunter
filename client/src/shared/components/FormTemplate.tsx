@@ -3,6 +3,7 @@ import {
   FormWrapper,
   FormGroup,
   FormSubmitButton,
+  Label,
   Input,
   Textarea
 } from '../utils/FormStyles/styles'
@@ -46,7 +47,7 @@ export const InputField = (props: FieldProps) => {
   const { fieldTestId, fieldErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
     <FormGroup>
-      <label>{labelName}</label>
+      <Label>{labelName}</Label>
       <Input
         data-testid={fieldTestId}
         type='text'
@@ -64,7 +65,7 @@ export const TextAreaField = (props: FieldProps) => {
   const { fieldTestId, fieldErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
     <FormGroup>
-      <label>{labelName}</label>
+      <Label>{labelName}</Label>
       <Textarea
         data-testid={fieldTestId}
         name={name}
@@ -80,12 +81,12 @@ export const TextAreaField = (props: FieldProps) => {
 export const SubmitField = (props: SubmitProps) => {
   const { value, disabled } = props
   return (
-    <div>
+    <FormGroup>
       <FormSubmitButton
         type='submit'
         value={value}
         disabled={disabled}
       />
-    </div>
+    </FormGroup>
   )
 }

@@ -9,6 +9,7 @@ const Artists = () => {
 
   return (
     <ArtistContainer>
+      <h1>List of Artists</h1>
       {
         !isDataLoading
           ? artistList

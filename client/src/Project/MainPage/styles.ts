@@ -5,14 +5,32 @@ export interface SlideI {
 }
 
 export const MainPageContainer = styled.div`
-  margin: 3rem;
+  display: grid;
+  grid-gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-auto-rows: auto;
+  margin: 5rem 8rem;
+  font-family: helvetica, times;;
+
+  @media screen and (max-width: 40em) {
+    margin: 2rem;
+  }
+`
+
+export const TextArea = styled.div`
+  line-height: 1.5;
+
+  & h1 {
+    font-size: 2.5rem;
+  }
+  & h4 {
+    font-size: 1.5rem;
+  }
 `
 
 export const SlideShow = styled.div`
-  max-width: 500px;
   position: relative;
   margin: auto;
-  font-family: monospace;
 `
 
 // eslint-disable-next-line
@@ -28,19 +46,19 @@ export const Slide = styled.div<SlideI>`
 `
 
 export const SlideNumber = styled.div`
-  color: var(--white);
-  font-size: 12px;
-  padding: 8px 12px;
   position: absolute;
+  color: var(--white);
+  font-size: 1rem;
+  padding: 0.5rem;
   bottom: 0;
 `
 
 export const SlideText = styled.div`
-  color: var(--white);
-  font-size: 15px;
-  padding: 8px 12px;
   position: absolute;
-  bottom: 8px;
+  color: var(--white);
+  font-size: 1rem;
+  padding: 0.5rem;
+  bottom: 1rem;
   width: 100%;
   text-align: center;
 `
@@ -55,12 +73,11 @@ export const ArrowPrev = styled.div`
   position: absolute;
   top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 16px;
+  margin-top: -1rem;
+  padding: 1rem;
   color: var(--white);
   font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
+  font-size: 1.5rem;
   border-radius: 0 3px 3px 0;
   user-select: none;
 
@@ -74,15 +91,14 @@ export const ArrowNext = styled.div`
   position: absolute;
   top: 50%;
   width: auto;
-  margin-top: -22px;
-  padding: 16px;
+  margin-top: -1rem;
+  padding: 1rem;
   color: var(--white);
   font-weight: bold;
-  font-size: 20px;
-  transition: 0.6s ease;
+  font-size: 1.5rem;
+  border-radius: 3px 0 0 3px;
   user-select: none;
   right: 0;
-  border-radius: 3px 0 0 3px;
   
   &:hover {
     background-color: rgba(0,0,0,0.8);

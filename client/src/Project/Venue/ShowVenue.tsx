@@ -7,7 +7,6 @@ import { BsTelephoneInboundFill, BsHouseFill } from 'react-icons/bs'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
 import {
   BasicDetail,
-  ShowDetail,
   ShowImage,
   SummaryTitle,
   SummarySubtitle,
@@ -27,7 +26,7 @@ const ShowVenue = () => {
         !isDataLoading
           ? venue
             ? <BasicDetail>
-                <ShowDetail>
+                <div>
                   <SummaryTitle>{venue.name}</SummaryTitle>
                   <SummarySubtitle>ID: {venue.id}</SummarySubtitle>
                   <p> <GiEarthAfricaEurope /> {venue.city}, {venue.county}</p>
@@ -37,7 +36,7 @@ const ShowVenue = () => {
                     <p>About us</p>
                     <FaQuoteLeft/> {venue.description} <FaQuoteRight />
                   </SummaryDescription>
-                </ShowDetail>
+                </div>
                 <ShowImage>
                   <img src={venue.imageLink} alt="Venue Image" />
                 </ShowImage>
