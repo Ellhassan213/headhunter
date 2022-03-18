@@ -1,4 +1,11 @@
 import React, { ChangeEvent, FocusEvent, ReactNode, FormEventHandler } from 'react'
+import {
+  FormWrapper,
+  FormGroup,
+  FormSubmitButton,
+  Input,
+  Textarea
+} from '../utils/FormStyles/styles'
 
 type ErrorTypes = {
   [key: string]: string
@@ -26,12 +33,21 @@ type FormProps = {
   onSubmit: FormEventHandler<HTMLFormElement>
 }
 
+export const Form = (props: FormProps) => {
+  const { onSubmit, children } = props
+  return (
+    <FormWrapper onSubmit={onSubmit}>
+      {children}
+    </FormWrapper>
+  )
+}
+
 export const InputField = (props: FieldProps) => {
   const { fieldTestId, fieldErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
-    <div className="form-group">
+    <FormGroup>
       <label>{labelName}</label>
-      <input
+      <Input
         data-testid={fieldTestId}
         type='text'
         name={name}
@@ -40,16 +56,16 @@ export const InputField = (props: FieldProps) => {
         onBlur={onBlur}
       />
       {errors?.[name] && <small data-testid={fieldErrorTestId}>{errors?.[name]}</small>}
-    </div>
+    </FormGroup>
   )
 }
 
 export const TextAreaField = (props: FieldProps) => {
   const { fieldTestId, fieldErrorTestId, labelName, name, value, errors, onChange, onBlur } = props
   return (
-    <div className="form-group">
+    <FormGroup>
       <label>{labelName}</label>
-      <textarea
+      <Textarea
         data-testid={fieldTestId}
         name={name}
         value={value}
@@ -57,7 +73,7 @@ export const TextAreaField = (props: FieldProps) => {
         onBlur={onBlur}
       />
       {errors?.[name] && <small data-testid={fieldErrorTestId}>{errors?.[name]}</small>}
-    </div>
+    </FormGroup>
   )
 }
 
@@ -65,21 +81,11 @@ export const SubmitField = (props: SubmitProps) => {
   const { value, disabled } = props
   return (
     <div>
-      <input
-        className="form-submit-btn"
+      <FormSubmitButton
         type='submit'
         value={value}
         disabled={disabled}
       />
     </div>
-  )
-}
-
-export const Form = (props: FormProps) => {
-  const { onSubmit, children } = props
-  return (
-    <form className="form-wrapper" onSubmit={onSubmit}>
-      {children}
-    </form>
   )
 }

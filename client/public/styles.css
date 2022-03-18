@@ -42,15 +42,15 @@ body {
 .header-link:hover { color: var(--light-blue); }
 .header-link:active { color: var(--light-blue); } */
 
-.ri-emotion-happy-fill {
+/* .ri-emotion-happy-fill {
   font-size: 50px;
-}
+} */
 
-.standard-page {
+/* .standard-page {
   margin: 50px;
-}
+} */
 
-.form-wrapper {
+/* .form-wrapper {
   max-width: 400px;
 }
 
@@ -63,18 +63,18 @@ body {
 .form-wrapper textarea {
   width: 300px;
   height: 100px;
-}
+} */
 
-.form-group {
+/* .form-group {
   width: 50%;
   margin: 15px 0;
 }
 
 .form-group > small {
   color: var(--pink);
-}
+} */
 
-.form-submit-btn {
+/* .form-submit-btn {
   background-color: var(--beige);
   background-image: linear-gradient(var(--beige), var(--pink));
   border-radius: 3px;
@@ -86,25 +86,25 @@ body {
 .form-submit-btn:hover {
   background-color: var(--blue);
   background-image: linear-gradient(var(--blue), var(--pink));
-}
+} */
 
-.page-link {
+/* .page-link {
   text-decoration: none;
   display: inline-block;
   margin: -15px 10px;
-  padding: 0;
+  padding: 0 5px;
   height: 0px;
 }
 .page-link:visited { color: var(--black); }
 .page-link:hover { color: var(--light-purple); }
-.page-link:active { color: var(--black); }
+.page-link:active { color: var(--black); } */
 
-.grouped-list-heading {
+/* .grouped-list-heading {
   margin: -10px 0;
   padding: 0;
-}
+} */
 
-.basic-details-container {
+/* .basic-details-container {
   height: 100%;
   display: grid;
   grid-gap: 10px;
@@ -126,18 +126,18 @@ body {
 .show-img-container > img {
   width: 100%;
   border-radius: 15px;
-}
+} */
 
-.monospace {
+/* .monospace {
   font-family: monospace;
   text-transform: uppercase;
 }
 
 .monospace > h1 {
   font-size: 2.5rem;
-}
+} */
 
-.subtitle {
+/* .subtitle {
   opacity: 0.5;
 }
 
@@ -156,9 +156,9 @@ span.genre {
   font-size: 0.9em;
   text-transform: uppercase;
   border: solid 1px var(--purple);
-}
+} */
 
-.description {
+/* .description {
   display: inline-block;
   padding: 20px 30px;
   margin-top: 30px;
@@ -169,15 +169,15 @@ span.genre {
 
 .description-lead > p {
   margin-top: 30px;
-}
+} */
 
-.description-detail {
+/* .description-detail {
   max-width: 450px;
-}
+} */
 
-.ri-phone-fill, .ri-earth-line, .ri-home-heart-fill {
+/* .ri-phone-fill, .ri-earth-line, .ri-home-heart-fill {
   margin: 10px 10px 0px 0px;
-}
+} */
 
 /* .slideshow-container {
   max-width: 500px;

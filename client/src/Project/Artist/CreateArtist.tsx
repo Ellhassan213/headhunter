@@ -1,13 +1,13 @@
 import React from 'react'
 import CreateArtistForm from './CreateArtistForm'
-import { CreateArtistContainer } from './styles'
+import { ArtistContainer } from './styles'
 
 const CreateArtist = () => {
   return (
-    <CreateArtistContainer>
+    <ArtistContainer>
       <h3>List a new artist</h3>
       <CreateArtistForm />
-    </CreateArtistContainer>
+    </ArtistContainer>
   )
 }
 

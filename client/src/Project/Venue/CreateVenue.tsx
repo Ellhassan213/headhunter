@@ -1,12 +1,13 @@
 import React from 'react'
 import CreateVenueForm from './CreateVenueForm'
+import { VenueContainer } from './styles'
 
 const CreateVenue = () => {
   return (
-    <div className="standard-page">
+    <VenueContainer>
       <h3>List a new venue</h3>
       <CreateVenueForm />
-    </div>
+    </VenueContainer>
   )
 }
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
 
-export const ArtistContainer = styled.div`
+export const VenueContainer = styled.div`
   margin: 3rem;
 `

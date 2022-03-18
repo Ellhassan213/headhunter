@@ -1,6 +1,20 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useArtists } from './ArtistContext'
+import { ArtistContainer } from './styles'
+import { GiEarthAfricaEurope } from 'react-icons/gi'
+import { BsTelephoneInboundFill, BsInstagram } from 'react-icons/bs'
+import { FaLink, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import {
+  PageALink,
+  BasicDetail,
+  ShowDetail,
+  ShowImage,
+  SummaryTitle,
+  SummarySubtitle,
+  SummaryGenres,
+  SummaryDescription
+} from '../../shared/utils/BusinessSummaryStyles/styles'
 
 type Id = { artistId: string }
 
@@ -10,34 +24,32 @@ const ShowArtist = () => {
   const artist = artistList?.filter(obj => obj.id.toString() === artistId)[0]
 
   return (
-    <div className='standard-page'>
+    <ArtistContainer>
       {
         !isDataLoading
           ? artist
-            ? <div className="basic-details-container">
-              <div className="show-details">
-                <h1 className="monospace">{artist.name}</h1>
-                <p className="subtitle">ID: {artist.id}</p>
-                <div className="genres"> <span className="genre">{artist.genre}</span> </div>
-                <p> <i className="ri-earth-line"></i> {artist.city}, {artist.county}</p>
-                <p><i className="ri-phone-fill"></i> {artist.phone}</p>
-                <p><i className="ri-links-fill"></i> <a className="page-link" href={artist.websiteLink} rel="noopener noreferrer" target="_blank">{artist.websiteLink}</a></p>
-                <p><i className="ri-instagram-line"></i> <a className="page-link" href={artist.instagramLink} rel="noopener noreferrer" target="_blank">{artist.instagramLink}</a></p>
-                <div className="description">
-                  <p className="description-lead">About me</p>
-                  <div className="description-detail">
-                    <i className="ri-double-quotes-l"></i> {artist.description} <i className="ri-double-quotes-r"></i>
-                  </div>
-                </div>
-              </div>
-              <div className="show-img-container">
+            ? <BasicDetail>
+              <ShowDetail>
+                <SummaryTitle>{artist.name}</SummaryTitle>
+                <SummarySubtitle>ID: {artist.id}</SummarySubtitle>
+                <SummaryGenres> <span>{artist.genre}</span> </SummaryGenres>
+                <p><GiEarthAfricaEurope /> {artist.city}, {artist.county}</p>
+                <p><BsTelephoneInboundFill /> {artist.phone}</p>
+                <p><FaLink/> <PageALink href={artist.websiteLink} rel="noopener noreferrer" target="_blank">{artist.websiteLink}</PageALink></p>
+                <p><BsInstagram /> <PageALink href={artist.instagramLink} rel="noopener noreferrer" target="_blank">{artist.instagramLink}</PageALink></p>
+                <SummaryDescription>
+                  <p>About me</p>
+                  <FaQuoteLeft /> {artist.description} <FaQuoteRight />
+                </SummaryDescription>
+              </ShowDetail>
+              <ShowImage>
                 <img src={artist.imageLink} alt="Artist Image" />
-              </div>
-            </div>
+              </ShowImage>
+            </BasicDetail>
             : <h3>{`Artist with ID ${artistId} not found`}</h3>
           : <h3>Fetcting data...</h3>
       }
-    </div>
+    </ArtistContainer>
   )
 }
 
