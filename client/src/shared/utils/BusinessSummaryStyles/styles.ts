@@ -30,6 +30,14 @@ export const BasicDetail = styled.div`
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-rows: auto;
+  margin: 5rem 10rem;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  box-shadow: -8px 0 8px -8px var(--blue), 0 8px 8px -8px var(--blue);
+
+  @media screen and (max-width: 50em) {
+    margin: 0;
+  }
 `
 
 export const ShowImage = styled.div`
