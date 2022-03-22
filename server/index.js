@@ -34,6 +34,15 @@ app.get('/api/getVenues', (req, res) => {
   })
 })
 
+app.delete('/api/deleteVenue/:id', (req, res) => {
+  const id = req.params.id
+  const sqlDelete = "DELETE FROM venues WHERE id = ?;"
+  db.query(sqlDelete, id, (err, result) => {
+    if (err) console.log(err)
+    res.send(result)
+  })
+})
+
 app.post('/api/insertArtist', (req, res) => {
   const name = req.body.name
   const city = req.body.city
@@ -54,6 +63,15 @@ app.post('/api/insertArtist', (req, res) => {
 app.get('/api/getArtists', (req, res) => {
   const sqlSelect = "SELECT * FROM artists;"
   db.query(sqlSelect, (err, result) => {
+    res.send(result)
+  })
+})
+
+app.delete('/api/deleteArtist/:id', (req, res) => {
+  const id = req.params.id
+  const sqlDelete = "DELETE FROM artists WHERE id = ?;"
+  db.query(sqlDelete, id, (err, result) => {
+    if (err) console.log(err)
     res.send(result)
   })
 })

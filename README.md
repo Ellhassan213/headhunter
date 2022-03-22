@@ -14,7 +14,7 @@ This is a free software for developing Reservation and Rental platforms.
 
 ### 1. Frontend
 
-Powered by React in the client folder. This application is deployed on Netlify and can be run locally. More details in client/README.
+Powered by React in the client folder. This application is deployed on Netlify and can be run locally. More details in `client/README`.
 
 ### 2. Backend
 

@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
+import { RiDeleteBin5Line, RiEdit2Line } from 'react-icons/ri'
 
 export const PageLink = styled(Link)`
   text-decoration: none;
@@ -33,7 +34,8 @@ export const BasicDetail = styled.div`
   margin: 5rem 10rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  box-shadow: -8px 0 8px -8px var(--blue), 0 8px 8px -8px var(--blue);
+  align-items: center;
+  /* box-shadow: -8px 0 8px -8px var(--blue), 0 8px 8px -8px var(--blue); */
 
   @media screen and (max-width: 50em) {
     margin: 0;
@@ -74,4 +76,36 @@ export const SummaryDescription = styled.div`
   margin: 1rem 0;
   border-radius: 5px;
   background: linear-gradient(var(--beige), var(--pink));
+`
+
+export const DeleteButton = styled(RiDeleteBin5Line)`
+  font-size: 2rem;
+  color: var(--red);
+  margin: 2rem;
+
+  &:hover {
+    color: var(--black);
+  }
+`
+
+export const EditButton = styled(RiEdit2Line)`
+  font-size: 2rem;
+  color: var(--blue);
+  margin: 2rem;
+
+  &:hover {
+    color: var(--black);
+  }
+`
+
+export const CRUDButtons = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+
+  @media screen and (max-width: 50em) {
+    flex-direction: row;
+  }
 `

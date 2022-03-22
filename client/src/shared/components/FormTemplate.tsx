@@ -55,6 +55,7 @@ export const InputField = (props: FieldProps) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        required
       />
       {errors?.[name] && <small data-testid={fieldErrorTestId}>{errors?.[name]}</small>}
     </FormGroup>
@@ -72,6 +73,7 @@ export const TextAreaField = (props: FieldProps) => {
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        required
       />
       {errors?.[name] && <small data-testid={fieldErrorTestId}>{errors?.[name]}</small>}
     </FormGroup>

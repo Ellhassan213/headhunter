@@ -14,10 +14,12 @@ export const Label = styled.label`
 
 export const Input = styled.input`
   height: 1.5rem;
+  font-size: 1rem;
 `
 
 export const Textarea = styled.textarea`
   height: 10rem;
+  font-size: 1rem;
 `
 
 export const FormGroup = styled.div`
