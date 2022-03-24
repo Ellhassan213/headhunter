@@ -1,5 +1,5 @@
 export interface ArtistsFormInputs {
-  id: string,
+  id: string | undefined,
   name: string,
   city: string,
   county: string,
@@ -33,4 +33,9 @@ export enum ArtistFormInputErrorTestIds {
   InstagramLink = 'artist-instagramLink-input-error',
   ImageLink = 'artist-imageLink-input-error',
   Description = 'artist-description-input-error'
+}
+
+export interface CreateFormI {
+  initialFormInputs: ArtistsFormInputs,
+  updateID?: string
 }

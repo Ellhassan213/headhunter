@@ -1,5 +1,5 @@
 export interface VenuesFormInputs {
-  id: string,
+  id: string | undefined,
   name: string,
   city: string,
   county: string,
@@ -27,4 +27,9 @@ export enum VenueFormInputErrorTestIds {
   Phone = 'venue-phone-input-error',
   ImageLink = 'venue-imageLink-input-error',
   Description = 'venue-description-input-error'
+}
+
+export interface CreateFormI {
+  initialFormInputs: VenuesFormInputs,
+  updateID?: string
 }

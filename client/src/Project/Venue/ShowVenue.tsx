@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom'
 import { useVenues, useUpdateVenues } from './VenueContext'
 import { VenueContainer } from './styles'
+import CreateVenueForm from './CreateVenueForm'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsHouseFill } from 'react-icons/bs'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
@@ -13,8 +14,9 @@ import {
   SummarySubtitle,
   SummaryDescription,
   DeleteButton,
-  // EditButton,
-  CRUDButtons
+  EditButton,
+  CRUDButtons,
+  EditFormContainer
 } from '../../shared/utils/BusinessSummaryStyles/styles'
 
 type Id = { venueId: string }
@@ -24,7 +26,12 @@ const ShowVenue = () => {
   const { venueId } = useParams<Id>()
   const { isDataLoading, venueList } = useVenues()
   const setVenueList = useUpdateVenues()
-  const venue = venueList?.filter(obj => obj.id.toString() === venueId)[0]
+  const venue = venueList?.filter(obj => obj.id?.toString() === venueId)[0]
+  const [formView, setFormView] = useState(false)
+
+  const toggleFormView = () => {
+    setFormView(prev => !prev)
+  }
 
   const deleteVenue = () => {
     Axios.delete(`/api/deleteVenue/${venue.id}`).then(res => {
@@ -56,12 +63,17 @@ const ShowVenue = () => {
                   <img src={venue.imageLink} alt="Venue Image" />
                 </ShowImage>
                 <CRUDButtons>
-                  {/* <EditButton onClick={editVenue} /> */}
-                  <DeleteButton onClick={deleteVenue}/>
+                  <EditButton onClick={toggleFormView} />
+                  {!formView && <DeleteButton onClick={deleteVenue} />}
                 </CRUDButtons>
               </BasicDetail>
             : <h3>{`Venue with ID ${venueId} not found`}</h3>
           : <h3>Fetcting data...</h3>
+      }
+      {formView &&
+        <EditFormContainer>
+          <CreateVenueForm initialFormInputs={venue} updateID={venue.id} />
+        </EditFormContainer>
       }
     </VenueContainer>
   )

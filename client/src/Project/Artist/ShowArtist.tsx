@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom'
 import { useArtists, useUpdateArtists } from './ArtistContext'
 import { ArtistContainer } from './styles'
+import CreateArtistForm from './CreateArtistForm'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsInstagram } from 'react-icons/bs'
 import { FaLink, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
@@ -15,8 +16,9 @@ import {
   SummaryGenres,
   SummaryDescription,
   DeleteButton,
-  // EditButton,
-  CRUDButtons
+  EditButton,
+  CRUDButtons,
+  EditFormContainer
 } from '../../shared/utils/BusinessSummaryStyles/styles'
 
 type Id = { artistId: string }
@@ -26,7 +28,12 @@ const ShowArtist = () => {
   const { artistId } = useParams<Id>()
   const { isDataLoading, artistList } = useArtists()
   const setArtistList = useUpdateArtists()
-  const artist = artistList?.filter(obj => obj.id.toString() === artistId)[0]
+  const artist = artistList?.filter(obj => obj.id?.toString() === artistId)[0]
+  const [formView, setFormView] = useState(false)
+
+  const toggleFormView = () => {
+    setFormView(prev => !prev)
+  }
 
   const deleteArtist = () => {
     Axios.delete(`/api/deleteArtist/${artist.id}`).then(res => {
@@ -60,12 +67,17 @@ const ShowArtist = () => {
                 <img src={artist.imageLink} alt="Artist Image" />
               </ShowImage>
               <CRUDButtons>
-                {/* <EditButton onClick={editArtist} /> */}
-                <DeleteButton onClick={deleteArtist}/>
+                <EditButton onClick={toggleFormView} />
+                {!formView && <DeleteButton onClick={deleteArtist} />}
               </CRUDButtons>
-            </BasicDetail>
+              </BasicDetail>
             : <h3>{`Artist with ID ${artistId} not found`}</h3>
           : <h3>Fetcting data...</h3>
+      }
+      {formView &&
+        <EditFormContainer>
+          <CreateArtistForm initialFormInputs={artist} updateID={artist.id} />
+        </EditFormContainer>
       }
     </ArtistContainer>
   )

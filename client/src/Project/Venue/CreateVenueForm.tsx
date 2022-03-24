@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../shared/hooks/useForm'
-import { VenueFormInputTestIds, VenueFormInputErrorTestIds } from './models/VenueFormInputs'
+import { VenueFormInputTestIds, VenueFormInputErrorTestIds, CreateFormI } from './models/VenueFormInputs'
 import {
   InputField,
   SubmitField,
@@ -11,21 +11,12 @@ import {
 import Axios from 'axios'
 import { useVenues, useUpdateVenues } from './VenueContext'
 
-const CreateVenueForm = () => {
+const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [venueFormInputs, setVenueFormInputs] = useState({
-    id: '',
-    name: '',
-    city: '',
-    county: '',
-    address: '',
-    phone: '',
-    imageLink: '',
-    description: ''
-  })
+  const [venueFormInputs, setVenueFormInputs] = useState(initialFormInputs)
   const { venueList } = useVenues()
   const setVenueList = useUpdateVenues()
 
@@ -54,10 +45,26 @@ const CreateVenueForm = () => {
     }
   }
 
+  const updateVenue = (event: SyntheticEvent) => {
+    event.preventDefault()
+    const isFormValid = handleSubmit(venueFormInputs)
+    if (isFormValid) {
+      setSubmitButtonText('Submitting...')
+      setIsSubmitting(false)
+      Axios.put(`/api/updateVenue/${updateID}`, venueFormInputs).then(() => {
+        const filteredVenueList = venueList.filter((venue) => venue.id !== updateID)
+        const updatedVenueList = [...filteredVenueList, { ...venueFormInputs, id: updateID }]
+        setVenueList(updatedVenueList)
+        setSubmitButtonText('Submit')
+        setIsSubmitting(true)
+      }).catch((e) => console.log(e))
+    }
+  }
+
   return (
     <>
-    <Form onSubmit={createVenue}>
-      <h3>List a new venue</h3>
+    <Form onSubmit={updateID ? updateVenue : createVenue}>
+      <h3>Venue Form</h3>
       <InputField
         fieldTestId={VenueFormInputTestIds.Name}
         fieldErrorTestId={VenueFormInputErrorTestIds.Name}

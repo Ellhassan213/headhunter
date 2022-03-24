@@ -1,7 +1,7 @@
 import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../shared/hooks/useForm'
-import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds } from './models/ArtistFormInputs'
+import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds, CreateFormI } from './models/ArtistFormInputs'
 import {
   InputField,
   SubmitField,
@@ -11,23 +11,12 @@ import {
 import Axios from 'axios'
 import { useArtists, useUpdateArtists } from './ArtistContext'
 
-const CreateArtistForm = () => {
+const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const history = useHistory()
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const [submitButtonText, setSubmitButtonText] = useState('Submit')
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [artistFormInputs, setArtistFormInputs] = useState({
-    id: '',
-    name: '',
-    city: '',
-    county: '',
-    genre: '',
-    phone: '',
-    imageLink: '',
-    websiteLink: '',
-    instagramLink: '',
-    description: ''
-  })
+  const [artistFormInputs, setArtistFormInputs] = useState(initialFormInputs)
   const { artistList } = useArtists()
   const setArtistList = useUpdateArtists()
 
@@ -56,10 +45,26 @@ const CreateArtistForm = () => {
     }
   }
 
+  const updateArtist = (event: SyntheticEvent) => {
+    event.preventDefault()
+    const isFormValid = handleSubmit(artistFormInputs)
+    if (isFormValid) {
+      setSubmitButtonText('Submitting...')
+      setIsSubmitting(false)
+      Axios.put(`/api/updateArtist/${updateID}`, artistFormInputs).then(() => {
+        const filteredArtistList = artistList.filter((artist) => artist.id !== updateID)
+        const updatedArtistList = [...filteredArtistList, { ...artistFormInputs, id: updateID }]
+        setArtistList(updatedArtistList)
+        setSubmitButtonText('Submit')
+        setIsSubmitting(true)
+      }).catch((e) => console.log(e))
+    }
+  }
+
   return (
     <>
-      <Form onSubmit={createArtist}>
-        <h3>List a new artist</h3>
+      <Form onSubmit={updateID ? updateArtist : createArtist}>
+        <h3>Artist Form</h3>
         <InputField
           fieldTestId={ArtistFormInputTestIds.Name}
           fieldErrorTestId={ArtistFormInputErrorTestIds.Name}

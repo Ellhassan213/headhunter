@@ -31,10 +31,11 @@ export const BasicDetail = styled.div`
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-rows: auto;
-  margin: 5rem 10rem;
+  /* margin: 5rem 10rem; */
   padding: 0.5rem;
   border-radius: 0.5rem;
   align-items: center;
+  /* background: yellow; */
   /* box-shadow: -8px 0 8px -8px var(--blue), 0 8px 8px -8px var(--blue); */
 
   @media screen and (max-width: 50em) {
@@ -107,5 +108,20 @@ export const CRUDButtons = styled.div`
 
   @media screen and (max-width: 50em) {
     flex-direction: row;
+  }
+`
+
+export const EditFormContainer = styled.div`
+  margin: 4rem 0;
+  padding: 1rem;
+  animation: leftToRight ease 0.5s;
+  justify-content: left;
+
+  @keyframes leftToRight {
+  0% {
+    margin-left: -50%;
+  }
+  100% {
+    margin-left: 0%;
   }
 `

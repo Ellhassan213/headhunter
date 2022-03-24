@@ -3,9 +3,22 @@ import CreateArtistForm from './CreateArtistForm'
 import { ArtistContainer } from './styles'
 
 const CreateArtist = () => {
+  const initialFormInputs = {
+    id: '',
+    name: '',
+    city: '',
+    county: '',
+    genre: '',
+    phone: '',
+    imageLink: '',
+    websiteLink: '',
+    instagramLink: '',
+    description: ''
+  }
+
   return (
     <ArtistContainer>
-      <CreateArtistForm />
+      <CreateArtistForm initialFormInputs={initialFormInputs}/>
     </ArtistContainer>
   )
 }

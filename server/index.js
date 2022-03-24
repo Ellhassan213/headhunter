@@ -38,7 +38,28 @@ app.delete('/api/deleteVenue/:id', (req, res) => {
   const id = req.params.id
   const sqlDelete = "DELETE FROM venues WHERE id = ?;"
   db.query(sqlDelete, id, (err, result) => {
-    if (err) console.log(err)
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+app.put('/api/updateVenue/:id', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  const city = req.body.city
+  const county = req.body.county
+  const address = req.body.address
+  const phone = req.body.phone
+  const imageLink = req.body.imageLink
+  const description = req.body.description
+
+  const sqlUpdate = `UPDATE venues
+    SET name="${name}", city="${city}", county="${county}", address="${address}",
+    phone="${phone}", imageLink="${imageLink}", description="${description}"
+    WHERE id =${id}`
+
+  db.query(sqlUpdate, (err, result) => {
+    if (err) throw err
     res.send(result)
   })
 })
@@ -71,7 +92,30 @@ app.delete('/api/deleteArtist/:id', (req, res) => {
   const id = req.params.id
   const sqlDelete = "DELETE FROM artists WHERE id = ?;"
   db.query(sqlDelete, id, (err, result) => {
-    if (err) console.log(err)
+    if (err) throw err
+    res.send(result)
+  })
+})
+
+app.put('/api/updateArtist/:id', (req, res) => {
+  const id = req.params.id
+  const name = req.body.name
+  const city = req.body.city
+  const county = req.body.county
+  const genre = req.body.genre
+  const phone = req.body.phone
+  const websiteLink = req.body.websiteLink
+  const instagramLink = req.body.instagramLink
+  const imageLink = req.body.imageLink
+  const description = req.body.description
+
+  const sqlUpdate = `UPDATE artists
+  SET name="${name}", city="${city}", county="${county}", genre="${genre}",
+  phone="${phone}", websiteLink="${websiteLink}", instagramLink="${instagramLink}",
+  imageLink="${imageLink}", description="${description}" WHERE id =${id}`
+
+  db.query(sqlUpdate, (err, result) => {
+    if (err) throw err
     res.send(result)
   })
 })
