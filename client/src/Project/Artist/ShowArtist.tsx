@@ -8,6 +8,7 @@ import CreateArtistForm from './CreateArtistForm'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsInstagram } from 'react-icons/bs'
 import { FaLink, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import {
   PageALink,
   BasicDetail,
@@ -73,7 +74,8 @@ const ShowArtist = () => {
       const list = [...artistList].filter(artst => artst.id !== artist.id)
       setArtistList(list)
       history.push('/artists')
-    }).catch((e) => console.log(e))
+      toast.success(`Successfully deleted ${artist.name}!`)
+    }).catch((e) => toast.error(`We could'nt delete ${artist.name} unfortunately!`, e))
   }
 
   return (

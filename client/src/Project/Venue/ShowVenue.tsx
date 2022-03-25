@@ -8,6 +8,7 @@ import CreateVenueForm from './CreateVenueForm'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsHouseFill } from 'react-icons/bs'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
+import { toast } from 'react-toastify'
 import {
   BasicDetail,
   ShowImage,
@@ -69,7 +70,8 @@ const ShowVenue = () => {
       const list = [...venueList].filter(ven => ven.id !== venue.id)
       setVenueList(list)
       history.push('/venues')
-    }).catch((e) => console.log(e))
+      toast.success(`Successfully deleted ${venue.name}!`)
+    }).catch((e) => toast.error(`We could'nt delete ${venue.name} unfortunately!`, e))
   }
 
   return (

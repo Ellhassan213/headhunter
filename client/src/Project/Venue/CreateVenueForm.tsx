@@ -2,14 +2,15 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../shared/hooks/useForm'
 import { VenueFormInputTestIds, VenueFormInputErrorTestIds, CreateFormI } from './models/VenueFormInputs'
+import Axios from 'axios'
+import { useVenues, useUpdateVenues } from './VenueContext'
+import { toast } from 'react-toastify'
 import {
   InputField,
   SubmitField,
   TextAreaField,
   Form
 } from '../../shared/components/FormTemplate'
-import Axios from 'axios'
-import { useVenues, useUpdateVenues } from './VenueContext'
 
 const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const history = useHistory()
@@ -41,7 +42,8 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/venues')
-      }).catch((e) => console.log(e))
+        toast.success(`Successfully created ${venueFormInputs.name}!`)
+      }).catch((e) => toast.error(`We could'nt create ${venueFormInputs.name} unfortunately!`, e))
     }
   }
 
@@ -58,7 +60,8 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/venues')
-      }).catch((e) => console.log(e))
+        toast.success(`Successfully updated ${venueFormInputs.name}!`)
+      }).catch((e) => toast.error(`We could'nt update ${venueFormInputs.name} unfortunately!`, e))
     }
   }
 

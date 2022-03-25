@@ -2,14 +2,15 @@ import React, { SyntheticEvent, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import useForm from '../../shared/hooks/useForm'
 import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds, CreateFormI } from './models/ArtistFormInputs'
+import Axios from 'axios'
+import { useArtists, useUpdateArtists } from './ArtistContext'
+import { toast } from 'react-toastify'
 import {
   InputField,
   SubmitField,
   TextAreaField,
   Form
 } from '../../shared/components/FormTemplate'
-import Axios from 'axios'
-import { useArtists, useUpdateArtists } from './ArtistContext'
 
 const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const history = useHistory()
@@ -41,7 +42,8 @@ const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/artists')
-      }).catch((e) => console.log(e))
+        toast.success(`Successfully created ${artistFormInputs.name}!`)
+      }).catch((e) => toast.error(`We could'nt create ${artistFormInputs.name} unfortunately!`, e))
     }
   }
 
@@ -58,7 +60,8 @@ const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
         history.push('/artists')
-      }).catch((e) => console.log(e))
+        toast.success(`Successfully updated ${artistFormInputs.name}!`)
+      }).catch((e) => toast.error(`We could'nt update ${artistFormInputs.name} unfortunately!`, e))
     }
   }
 
