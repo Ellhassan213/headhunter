@@ -39,3 +39,7 @@ export interface CreateFormI {
   initialFormInputs: ArtistsFormInputs,
   updateID?: string
 }
+
+export interface Artist {
+  artist: ArtistsFormInputs
+}

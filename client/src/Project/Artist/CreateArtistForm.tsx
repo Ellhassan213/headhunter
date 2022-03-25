@@ -57,6 +57,7 @@ const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setArtistList(updatedArtistList)
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
+        history.push('/artists')
       }).catch((e) => console.log(e))
     }
   }

@@ -33,3 +33,7 @@ export interface CreateFormI {
   initialFormInputs: VenuesFormInputs,
   updateID?: string
 }
+
+export interface Venue {
+  venue: VenuesFormInputs
+}

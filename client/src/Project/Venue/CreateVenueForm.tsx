@@ -57,6 +57,7 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         setVenueList(updatedVenueList)
         setSubmitButtonText('Submit')
         setIsSubmitting(true)
+        history.push('/venues')
       }).catch((e) => console.log(e))
     }
   }

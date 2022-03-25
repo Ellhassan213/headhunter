@@ -18,7 +18,7 @@ export const PageALink = styled.a`
   text-decoration: none;
   display: inline-block;
   padding: 0 0.5rem;
-  height: 0px;
+  height: 0;
   color: var(--black);
 
   &:hover {
@@ -31,12 +31,16 @@ export const BasicDetail = styled.div`
   grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-auto-rows: auto;
-  /* margin: 5rem 10rem; */
+  margin: 0 10rem;
   padding: 0.5rem;
   border-radius: 0.5rem;
   align-items: center;
-  /* background: yellow; */
-  /* box-shadow: -8px 0 8px -8px var(--blue), 0 8px 8px -8px var(--blue); */
+  animation: fade ease 3s;
+
+  @keyframes fade {
+    from {opacity: .3}
+    to {opacity: 1}
+  }
 
   @media screen and (max-width: 50em) {
     margin: 0;
@@ -49,6 +53,12 @@ export const ShowImage = styled.div`
     width: 100%;
     border-radius: 10px;
   }
+`
+
+export const Summary = styled.div`
+  border-radius: 0.5rem;
+  padding: 1rem;
+  box-shadow: 0 0 2px 2px var(--blue);
 `
 
 export const SummaryTitle = styled.h1`
@@ -93,6 +103,7 @@ export const EditButton = styled(RiEdit2Line)`
   font-size: 2rem;
   color: var(--blue);
   margin: 2rem;
+  z-index: 100;
 
   &:hover {
     color: var(--black);
@@ -101,21 +112,21 @@ export const EditButton = styled(RiEdit2Line)`
 
 export const CRUDButtons = styled.div`
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   padding: 1rem;
+  margin: 0 10rem;
 
   @media screen and (max-width: 50em) {
-    flex-direction: row;
+    justify-content: center;
+    margin: 0;
   }
 `
 
 export const EditFormContainer = styled.div`
-  margin: 4rem 0;
+  margin: 1rem 0;
   padding: 1rem;
   animation: leftToRight ease 0.5s;
-  justify-content: left;
 
   @keyframes leftToRight {
   0% {
