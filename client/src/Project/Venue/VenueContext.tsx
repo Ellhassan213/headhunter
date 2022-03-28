@@ -9,7 +9,7 @@ import { VenuesFormInputs } from './models/VenueFormInputs'
 import Axios from 'axios'
 import useMountedState from '../../shared/hooks/useMountedState'
 
-type Venues = { venueList: VenuesFormInputs[], isDataLoading: boolean }
+type Venues = { venueList: VenuesFormInputs[], error: boolean }
 type SetVenues = (setVenueList: VenuesFormInputs[]) => void
 type ContextProviderProps = { children: ReactNode }
 
@@ -21,19 +21,26 @@ let initialState: VenuesFormInputs[]
 const VenueProvider = ({ children }: ContextProviderProps) => {
   const isMounted = useMountedState()
   const [venueList, setVenueList] = useState(initialState)
-  const [isDataLoading, setIsDataLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
+    getVenues()
+  }, [isMounted])
+
+  const getVenues = () => {
     Axios.get('/api/getVenues').then((response) => {
       if (isMounted()) {
         setVenueList(response.data)
-        setIsDataLoading(false)
+        setError(false)
       }
-    }).catch((e) => console.log(e))
-  }, [isMounted])
+    }).catch((e) => {
+      console.log(e)
+      setError(true)
+    })
+  }
 
   return (
-    <VenueStateContext.Provider value={{ venueList, isDataLoading }}>
+    <VenueStateContext.Provider value={{ venueList, error }}>
       <VenueDispatchContext.Provider value={setVenueList}>{children}</VenueDispatchContext.Provider>
     </VenueStateContext.Provider>
   )

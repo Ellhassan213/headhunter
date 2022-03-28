@@ -9,7 +9,7 @@ import { ArtistsFormInputs } from './models/ArtistFormInputs'
 import Axios from 'axios'
 import useMountedState from '../../shared/hooks/useMountedState'
 
-type Artists = { artistList: ArtistsFormInputs[], isDataLoading: boolean }
+type Artists = { artistList: ArtistsFormInputs[], error: boolean }
 type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
 type ContextProviderProps = { children: ReactNode }
 
@@ -21,19 +21,26 @@ let initialState: ArtistsFormInputs[]
 const ArtistProvider = ({ children }: ContextProviderProps) => {
   const isMounted = useMountedState()
   const [artistList, setArtistList] = useState(initialState)
-  const [isDataLoading, setIsDataLoading] = useState(true)
+  const [error, setError] = useState(false)
 
   useEffect(() => {
+    getArtists()
+  }, [isMounted])
+
+  const getArtists = () => {
     Axios.get('/api/getArtists').then((response) => {
       if (isMounted()) {
         setArtistList(response.data)
-        setIsDataLoading(false)
+        setError(false)
       }
-    }).catch((e) => console.log(e))
-  }, [isMounted])
+    }).catch((e) => {
+      console.log(e)
+      setError(true)
+    })
+  }
 
   return (
-    <ArtistStateContext.Provider value={{ artistList, isDataLoading }}>
+    <ArtistStateContext.Provider value={{ artistList, error }}>
       <ArtistDispatchContext.Provider value={setArtistList}>{children}</ArtistDispatchContext.Provider>
     </ArtistStateContext.Provider>
   )

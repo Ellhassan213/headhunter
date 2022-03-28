@@ -2,61 +2,21 @@ import React, { useState } from 'react'
 import Axios from 'axios'
 import { useParams, useHistory } from 'react-router-dom'
 import { useVenues, useUpdateVenues } from './VenueContext'
-import { Venue } from './models/VenueFormInputs'
 import { VenueContainer } from './styles'
-import CreateVenueForm from './CreateVenueForm'
-import { GiEarthAfricaEurope } from 'react-icons/gi'
-import { BsTelephoneInboundFill, BsHouseFill } from 'react-icons/bs'
-import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
 import { toast } from 'react-toastify'
-import {
-  BasicDetail,
-  ShowImage,
-  Summary,
-  SummaryTitle,
-  SummarySubtitle,
-  SummaryDescription,
-  DeleteButton,
-  EditButton,
-  CRUDButtons,
-  EditFormContainer
-} from '../../shared/utils/BusinessSummaryStyles/styles'
+import PageLoading from '../../shared/components/PageLoading'
+import PageError from '../../shared/components/PageError'
+import NotFound from '../../shared/components/NotFound'
+import VenueSummary from './VenueSummary'
+import EditVenue from './EditVenue'
+import { DeleteButton, EditButton, CRUDButtons } from '../../shared/utils/BusinessSummaryStyles/styles'
 
 type Id = { venueId: string }
-
-const VenueSummary = ({ venue }: Venue) => {
-  return (
-    <BasicDetail>
-      <Summary>
-        <SummaryTitle>{venue.name}</SummaryTitle>
-        <SummarySubtitle>ID: {venue.id}</SummarySubtitle>
-        <p> <GiEarthAfricaEurope /> {venue.city}, {venue.county}</p>
-        <p> <BsTelephoneInboundFill /> {venue.phone}</p>
-        <p> <BsHouseFill /> {venue.address}</p>
-        <SummaryDescription>
-          <p>About us</p>
-          <FaQuoteLeft/> {venue.description} <FaQuoteRight />
-        </SummaryDescription>
-      </Summary>
-      <ShowImage>
-        <img src={venue.imageLink} alt="Venue Image" />
-      </ShowImage>
-    </BasicDetail>
-  )
-}
-
-const EditVenue = ({ venue }: Venue) => {
-  return (
-    <EditFormContainer>
-      <CreateVenueForm initialFormInputs={venue} updateID={venue.id} />
-    </EditFormContainer>
-  )
-}
 
 const ShowVenue = () => {
   const history = useHistory()
   const { venueId } = useParams<Id>()
-  const { isDataLoading, venueList } = useVenues()
+  const { error, venueList } = useVenues()
   const setVenueList = useUpdateVenues()
   const venue = venueList?.filter(obj => obj.id?.toString() === venueId)[0]
   const [formView, setFormView] = useState(false)
@@ -74,20 +34,17 @@ const ShowVenue = () => {
     }).catch((e) => toast.error(`We could'nt delete ${venue.name} unfortunately!`, e))
   }
 
+  if (error) return <PageError />
+  if (!venueList) return <PageLoading />
+  if (!venue) return <NotFound />
+
   return (
     <VenueContainer>
-    {!isDataLoading
-      ? venue
-        ? <>
-          <CRUDButtons>
-            <EditButton onClick={toggleFormView} />
-            {!formView && <DeleteButton onClick={deleteVenue} />}
-          </CRUDButtons>
-          {formView ? <EditVenue venue={venue} /> : <VenueSummary venue={venue} />}
-        </>
-        : <h3>{`Venue with ID ${venueId} not found`}</h3>
-      : <h3>Fetcting data...</h3>
-    }
+      <CRUDButtons>
+        <EditButton onClick={toggleFormView} />
+        {!formView && <DeleteButton onClick={deleteVenue} />}
+      </CRUDButtons>
+      {formView ? <EditVenue venue={venue} /> : <VenueSummary venue={venue} />}
     </VenueContainer>
   )
 }
