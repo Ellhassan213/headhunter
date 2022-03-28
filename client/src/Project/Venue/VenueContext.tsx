@@ -2,32 +2,48 @@ import React, {
   useState,
   useEffect,
   useContext,
-  ReactNode,
   createContext
 } from 'react'
-import { VenuesFormInputs } from './models/VenueFormInputs'
 import Axios from 'axios'
 import useMountedState from '../../shared/hooks/useMountedState'
+import { useHistory } from 'react-router-dom'
+import { toast } from 'react-toastify'
+import {
+  VenuesFormInputs,
+  Venues,
+  SetVenues,
+  ContextProviderProps
+} from './models'
 
-type Venues = { venueList: VenuesFormInputs[], error: boolean }
-type SetVenues = (setVenueList: VenuesFormInputs[]) => void
-type ContextProviderProps = { children: ReactNode }
+let initialState: VenuesFormInputs[]
+const initialFormInputs: VenuesFormInputs = {
+  id: '',
+  name: '',
+  city: '',
+  county: '',
+  address: '',
+  phone: '',
+  imageLink: '',
+  description: ''
+}
 
 const VenueStateContext = createContext<Venues | undefined>(undefined)
 const VenueDispatchContext = createContext<SetVenues | undefined>(undefined)
 
-let initialState: VenuesFormInputs[]
-
 const VenueProvider = ({ children }: ContextProviderProps) => {
+  const history = useHistory()
   const isMounted = useMountedState()
+  const [venueFormInputs, setVenueFormInputs] = useState(initialFormInputs)
+  const [submitButtonText, setSubmitButtonText] = useState('Submit')
+  const [isSubmitting, setIsSubmitting] = useState(false)
   const [venueList, setVenueList] = useState(initialState)
   const [error, setError] = useState(false)
 
   useEffect(() => {
-    getVenues()
+    apiGetVenues()
   }, [isMounted])
 
-  const getVenues = () => {
+  const apiGetVenues = () => {
     Axios.get('/api/getVenues').then((response) => {
       if (isMounted()) {
         setVenueList(response.data)
@@ -39,8 +55,57 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
     })
   }
 
+  const apiCreateVenue = () => {
+    setSubmitButtonText('Submitting...')
+    setIsSubmitting(true)
+    Axios.post('/api/insertVenue',
+      venueFormInputs
+    ).then((response) => {
+      const insertID = response.data.insertId
+      setVenueList([...venueList, { ...venueFormInputs, id: insertID }])
+      setSubmitButtonText('Submit')
+      setIsSubmitting(false)
+      history.push('/venues')
+      toast.success(`Successfully created ${venueFormInputs.name}!`)
+    }).catch(() => toast.error(`We could'nt create ${venueFormInputs.name} unfortunately!`))
+  }
+
+  const apiUpdateVenue = (updateID: string | undefined) => {
+    setSubmitButtonText('Submitting...')
+    setIsSubmitting(true)
+    Axios.put(`/api/updateVenue/${updateID}`, venueFormInputs).then(() => {
+      const filteredVenueList = venueList.filter((venue) => venue.id !== updateID)
+      const updatedVenueList = [...filteredVenueList, { ...venueFormInputs, id: updateID }]
+      setVenueList(updatedVenueList)
+      setSubmitButtonText('Submit')
+      setIsSubmitting(false)
+      history.push('/venues')
+      toast.success(`Successfully updated ${venueFormInputs.name}!`)
+    }).catch((e) => toast.error(`We could'nt update ${venueFormInputs.name} unfortunately!`, e))
+  }
+
+  const apiDeleteVenue = (venue: VenuesFormInputs) => {
+    Axios.delete(`/api/deleteVenue/${venue.id}`).then(() => {
+      const list = [...venueList].filter(ven => ven.id !== venue.id)
+      setVenueList(list)
+      history.push('/venues')
+      toast.success(`Successfully deleted ${venue.name}!`)
+    }).catch(() => toast.error(`We could'nt delete ${venue.name} unfortunately!`))
+  }
+
   return (
-    <VenueStateContext.Provider value={{ venueList, error }}>
+    <VenueStateContext.Provider
+      value={{
+        venueList,
+        error,
+        venueFormInputs,
+        submitButtonText,
+        isSubmitting,
+        apiDeleteVenue,
+        setVenueFormInputs,
+        apiCreateVenue,
+        apiUpdateVenue
+      }}>
       <VenueDispatchContext.Provider value={setVenueList}>{children}</VenueDispatchContext.Provider>
     </VenueStateContext.Provider>
   )

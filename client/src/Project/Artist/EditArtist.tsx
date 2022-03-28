@@ -1,5 +1,5 @@
 import React from 'react'
-import { Artist } from './models/ArtistFormInputs'
+import { Artist } from './models'
 import CreateArtistForm from './CreateArtistForm'
 import { EditFormContainer } from '../../shared/utils/BusinessSummaryStyles/styles'
 

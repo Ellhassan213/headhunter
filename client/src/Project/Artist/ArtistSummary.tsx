@@ -2,7 +2,7 @@ import React from 'react'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsInstagram } from 'react-icons/bs'
 import { FaLink, FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
-import { Artist } from './models/ArtistFormInputs'
+import { Artist } from './models'
 import {
   PageALink,
   BasicDetail,

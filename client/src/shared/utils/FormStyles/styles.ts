@@ -44,4 +44,8 @@ export const FormSubmitButton = styled.input`
     background-color: var(--blue);
     background-image: linear-gradient(var(--blue), var(--pink));
   }
+
+  &:disabled {
+    background: var(--black);
+  }
 `

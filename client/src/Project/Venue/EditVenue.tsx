@@ -1,5 +1,5 @@
 import React from 'react'
-import { Venue } from './models/VenueFormInputs'
+import { Venue } from './models'
 import CreateVenueForm from './CreateVenueForm'
 import { EditFormContainer } from '../../shared/utils/BusinessSummaryStyles/styles'
 

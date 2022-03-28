@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import CreateVenue from './CreateVenue'
-import { VenueFormInputErrorTestIds, VenueFormInputTestIds } from './models/VenueFormInputs'
+import { VenueFormInputErrorTestIds, VenueFormInputTestIds } from './models'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useUpdateVenues, useVenues, VenueProvider } from './VenueContext'
 import venueData from '../../shared/data/venueData'

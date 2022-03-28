@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export interface VenuesFormInputs {
   id: string | undefined,
   name: string,
@@ -36,4 +38,22 @@ export interface CreateFormI {
 
 export interface Venue {
   venue: VenuesFormInputs
+}
+
+export type BasicFunction = () => void
+export type UpdateFunction = (updateID: string | undefined) => void
+export type DeleteFunction = (venue: VenuesFormInputs) => void
+export type SetFormInputs = (setVenueFormInputs: VenuesFormInputs) => void
+export type SetVenues = (setVenueList: VenuesFormInputs[]) => void
+export type ContextProviderProps = { children: ReactNode }
+export type Venues = {
+  venueList: VenuesFormInputs[],
+  error: boolean,
+  venueFormInputs: VenuesFormInputs,
+  submitButtonText: string,
+  isSubmitting: boolean,
+  apiCreateVenue: BasicFunction,
+  apiDeleteVenue: DeleteFunction,
+  apiUpdateVenue: UpdateFunction,
+  setVenueFormInputs: SetFormInputs
 }

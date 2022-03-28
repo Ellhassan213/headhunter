@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, cleanup, fireEvent } from '@testing-library/react'
 import CreateArtist from './CreateArtist'
-import { ArtistFormInputErrorTestIds, ArtistFormInputTestIds } from './models/ArtistFormInputs'
+import { ArtistFormInputErrorTestIds, ArtistFormInputTestIds } from './models'
 import { renderHook, act } from '@testing-library/react-hooks'
 import { useUpdateArtists, useArtists, ArtistProvider } from './ArtistContext'
 import artistData from '../../shared/data/artistData'

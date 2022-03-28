@@ -1,3 +1,5 @@
+import { ReactNode } from 'react'
+
 export interface ArtistsFormInputs {
   id: string | undefined,
   name: string,
@@ -42,4 +44,22 @@ export interface CreateFormI {
 
 export interface Artist {
   artist: ArtistsFormInputs
+}
+
+export type BasicFunction = () => void
+export type UpdateFunction = (updateID: string | undefined) => void
+export type DeleteFunction = (artist: ArtistsFormInputs) => void
+export type SetFormInputs = (setArtistFormInputs: ArtistsFormInputs) => void
+export type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
+export type ContextProviderProps = { children: ReactNode }
+export type Artists = {
+  artistList: ArtistsFormInputs[],
+  error: boolean,
+  artistFormInputs: ArtistsFormInputs,
+  submitButtonText: string,
+  isSubmitting: boolean,
+  apiCreateArtist: BasicFunction,
+  apiDeleteArtist: DeleteFunction,
+  apiUpdateArtist: UpdateFunction,
+  setArtistFormInputs: SetFormInputs
 }

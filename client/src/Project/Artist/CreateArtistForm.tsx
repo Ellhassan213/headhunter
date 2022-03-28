@@ -1,10 +1,7 @@
-import React, { SyntheticEvent, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { SyntheticEvent, useEffect } from 'react'
 import useForm from '../../shared/hooks/useForm'
-import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds, CreateFormI } from './models/ArtistFormInputs'
-import Axios from 'axios'
-import { useArtists, useUpdateArtists } from './ArtistContext'
-import { toast } from 'react-toastify'
+import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds, CreateFormI } from './models'
+import { useArtists } from './ArtistContext'
 import {
   InputField,
   SubmitField,
@@ -13,13 +10,25 @@ import {
 } from '../../shared/components/FormTemplate'
 
 const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
-  const history = useHistory()
-  const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
-  const [submitButtonText, setSubmitButtonText] = useState('Submit')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [artistFormInputs, setArtistFormInputs] = useState(initialFormInputs)
-  const { artistList } = useArtists()
-  const setArtistList = useUpdateArtists()
+  const {
+    formInputsErrors,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  } = useForm()
+
+  const {
+    artistFormInputs,
+    submitButtonText,
+    isSubmitting,
+    setArtistFormInputs,
+    apiCreateArtist,
+    apiUpdateArtist
+  } = useArtists()
+
+  useEffect(() => {
+    setArtistFormInputs(initialFormInputs)
+  }, [])
 
   const setInput = (name: string, value: string) => {
     setArtistFormInputs({
@@ -31,38 +40,13 @@ const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const createArtist = (event: SyntheticEvent) => {
     event.preventDefault()
     const isFormValid = handleSubmit(artistFormInputs)
-    if (isFormValid) {
-      setSubmitButtonText('Submitting...')
-      setIsSubmitting(false)
-      Axios.post('/api/insertArtist',
-        artistFormInputs
-      ).then((response) => {
-        const insertID = response.data.insertId
-        setArtistList([...artistList, { ...artistFormInputs, id: insertID }])
-        setSubmitButtonText('Submit')
-        setIsSubmitting(true)
-        history.push('/artists')
-        toast.success(`Successfully created ${artistFormInputs.name}!`)
-      }).catch((e) => toast.error(`We could'nt create ${artistFormInputs.name} unfortunately!`, e))
-    }
+    if (isFormValid) apiCreateArtist()
   }
 
   const updateArtist = (event: SyntheticEvent) => {
     event.preventDefault()
     const isFormValid = handleSubmit(artistFormInputs)
-    if (isFormValid) {
-      setSubmitButtonText('Submitting...')
-      setIsSubmitting(false)
-      Axios.put(`/api/updateArtist/${updateID}`, artistFormInputs).then(() => {
-        const filteredArtistList = artistList.filter((artist) => artist.id !== updateID)
-        const updatedArtistList = [...filteredArtistList, { ...artistFormInputs, id: updateID }]
-        setArtistList(updatedArtistList)
-        setSubmitButtonText('Submit')
-        setIsSubmitting(true)
-        history.push('/artists')
-        toast.success(`Successfully updated ${artistFormInputs.name}!`)
-      }).catch((e) => toast.error(`We could'nt update ${artistFormInputs.name} unfortunately!`, e))
-    }
+    if (isFormValid) apiUpdateArtist(updateID)
   }
 
   return (

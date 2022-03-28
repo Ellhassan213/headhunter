@@ -2,7 +2,7 @@ import React from 'react'
 import { GiEarthAfricaEurope } from 'react-icons/gi'
 import { BsTelephoneInboundFill, BsHouseFill } from 'react-icons/bs'
 import { FaQuoteLeft, FaQuoteRight } from 'react-icons/fa'
-import { Venue } from './models/VenueFormInputs'
+import { Venue } from './models'
 import {
   BasicDetail,
   ShowImage,

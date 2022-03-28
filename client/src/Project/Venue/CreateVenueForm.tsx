@@ -1,10 +1,7 @@
-import React, { SyntheticEvent, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { SyntheticEvent, useEffect } from 'react'
 import useForm from '../../shared/hooks/useForm'
-import { VenueFormInputTestIds, VenueFormInputErrorTestIds, CreateFormI } from './models/VenueFormInputs'
-import Axios from 'axios'
-import { useVenues, useUpdateVenues } from './VenueContext'
-import { toast } from 'react-toastify'
+import { VenueFormInputTestIds, VenueFormInputErrorTestIds, CreateFormI } from './models'
+import { useVenues } from './VenueContext'
 import {
   InputField,
   SubmitField,
@@ -13,13 +10,25 @@ import {
 } from '../../shared/components/FormTemplate'
 
 const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
-  const history = useHistory()
-  const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
-  const [submitButtonText, setSubmitButtonText] = useState('Submit')
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [venueFormInputs, setVenueFormInputs] = useState(initialFormInputs)
-  const { venueList } = useVenues()
-  const setVenueList = useUpdateVenues()
+  const {
+    formInputsErrors,
+    handleChange,
+    handleBlur,
+    handleSubmit
+  } = useForm()
+
+  const {
+    venueFormInputs,
+    submitButtonText,
+    isSubmitting,
+    setVenueFormInputs,
+    apiCreateVenue,
+    apiUpdateVenue
+  } = useVenues()
+
+  useEffect(() => {
+    setVenueFormInputs(initialFormInputs)
+  }, [])
 
   const setInput = (name: string, value: string) => {
     setVenueFormInputs({
@@ -31,38 +40,13 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const createVenue = (event: SyntheticEvent) => {
     event.preventDefault()
     const isFormValid = handleSubmit(venueFormInputs)
-    if (isFormValid) {
-      setSubmitButtonText('Submitting...')
-      setIsSubmitting(false)
-      Axios.post('/api/insertVenue',
-        venueFormInputs
-      ).then((response) => {
-        const insertID = response.data.insertId
-        setVenueList([...venueList, { ...venueFormInputs, id: insertID }])
-        setSubmitButtonText('Submit')
-        setIsSubmitting(true)
-        history.push('/venues')
-        toast.success(`Successfully created ${venueFormInputs.name}!`)
-      }).catch((e) => toast.error(`We could'nt create ${venueFormInputs.name} unfortunately!`, e))
-    }
+    if (isFormValid) apiCreateVenue()
   }
 
   const updateVenue = (event: SyntheticEvent) => {
     event.preventDefault()
     const isFormValid = handleSubmit(venueFormInputs)
-    if (isFormValid) {
-      setSubmitButtonText('Submitting...')
-      setIsSubmitting(false)
-      Axios.put(`/api/updateVenue/${updateID}`, venueFormInputs).then(() => {
-        const filteredVenueList = venueList.filter((venue) => venue.id !== updateID)
-        const updatedVenueList = [...filteredVenueList, { ...venueFormInputs, id: updateID }]
-        setVenueList(updatedVenueList)
-        setSubmitButtonText('Submit')
-        setIsSubmitting(true)
-        history.push('/venues')
-        toast.success(`Successfully updated ${venueFormInputs.name}!`)
-      }).catch((e) => toast.error(`We could'nt update ${venueFormInputs.name} unfortunately!`, e))
-    }
+    if (isFormValid) apiUpdateVenue(updateID)
   }
 
   return (
