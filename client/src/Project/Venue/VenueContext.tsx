@@ -1,33 +1,12 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  createContext
-} from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import Axios from 'axios'
 import useMountedState from '../../shared/hooks/useMountedState'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import {
-  VenuesFormInputs,
-  Venues,
-  SetVenues,
-  ContextProviderProps
-} from './models'
+import { VenuesFormInputs, Venues, SetVenues, ContextProviderProps } from './models'
+import { initialFormInputs, initialState } from './VenueDefaultData'
 
-let initialState: VenuesFormInputs[]
-const initialFormInputs: VenuesFormInputs = {
-  id: '',
-  name: '',
-  city: '',
-  county: '',
-  address: '',
-  phone: '',
-  imageLink: '',
-  description: ''
-}
-
-const VenueStateContext = createContext<Venues | undefined>(undefined)
+const VenueStatesFunctionsContext = createContext<Venues | undefined>(undefined)
 const VenueDispatchContext = createContext<SetVenues | undefined>(undefined)
 
 const VenueProvider = ({ children }: ContextProviderProps) => {
@@ -49,8 +28,7 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
         setVenueList(response.data)
         setError(false)
       }
-    }).catch((e) => {
-      console.log(e)
+    }).catch(() => {
       setError(true)
     })
   }
@@ -81,7 +59,7 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
       setIsSubmitting(false)
       history.push('/venues')
       toast.success(`Successfully updated ${venueFormInputs.name}!`)
-    }).catch((e) => toast.error(`We could'nt update ${venueFormInputs.name} unfortunately!`, e))
+    }).catch(() => toast.error(`We could'nt update ${venueFormInputs.name} unfortunately!`))
   }
 
   const apiDeleteVenue = (venue: VenuesFormInputs) => {
@@ -94,7 +72,7 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
   }
 
   return (
-    <VenueStateContext.Provider
+    <VenueStatesFunctionsContext.Provider
       value={{
         venueList,
         error,
@@ -107,12 +85,12 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
         apiUpdateVenue
       }}>
       <VenueDispatchContext.Provider value={setVenueList}>{children}</VenueDispatchContext.Provider>
-    </VenueStateContext.Provider>
+    </VenueStatesFunctionsContext.Provider>
   )
 }
 
 const useVenues = () => {
-  const context = useContext(VenueStateContext)
+  const context = useContext(VenueStatesFunctionsContext)
   if (context === undefined) {
     throw new Error('useVenues must be used within a VenuesProvider')
   }

@@ -1,33 +1,10 @@
-import React, {
-  useState,
-  useEffect,
-  useContext,
-  createContext
-} from 'react'
+import React, { useState, useEffect, useContext, createContext } from 'react'
 import Axios from 'axios'
 import useMountedState from '../../shared/hooks/useMountedState'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import {
-  ArtistsFormInputs,
-  Artists,
-  SetArtists,
-  ContextProviderProps
-} from './models'
-
-let initialState: ArtistsFormInputs[]
-const initialFormInputs: ArtistsFormInputs = {
-  id: '',
-  name: '',
-  city: '',
-  county: '',
-  genre: '',
-  phone: '',
-  imageLink: '',
-  websiteLink: '',
-  instagramLink: '',
-  description: ''
-}
+import { ArtistsFormInputs, Artists, SetArtists, ContextProviderProps } from './models'
+import { initialFormInputs, initialState } from './ArtistDefaultData'
 
 const ArtistStatesFunctionsContext = createContext<Artists | undefined>(undefined)
 const ArtistDispatchContext = createContext<SetArtists | undefined>(undefined)

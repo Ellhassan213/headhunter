@@ -2,28 +2,13 @@ import React, { SyntheticEvent, useEffect } from 'react'
 import useForm from '../../shared/hooks/useForm'
 import { VenueFormInputTestIds, VenueFormInputErrorTestIds, CreateFormI } from './models'
 import { useVenues } from './VenueContext'
-import {
-  InputField,
-  SubmitField,
-  TextAreaField,
-  Form
-} from '../../shared/components/FormTemplate'
+import { InputField, SubmitField, TextAreaField, Form } from '../../shared/components/FormTemplate'
 
 const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
+  const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const {
-    formInputsErrors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  } = useForm()
-
-  const {
-    venueFormInputs,
-    submitButtonText,
-    isSubmitting,
-    setVenueFormInputs,
-    apiCreateVenue,
-    apiUpdateVenue
+    venueFormInputs, submitButtonText, isSubmitting,
+    setVenueFormInputs, apiCreateVenue, apiUpdateVenue
   } = useVenues()
 
   useEffect(() => {

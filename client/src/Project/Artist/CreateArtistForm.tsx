@@ -2,28 +2,13 @@ import React, { SyntheticEvent, useEffect } from 'react'
 import useForm from '../../shared/hooks/useForm'
 import { ArtistFormInputTestIds, ArtistFormInputErrorTestIds, CreateFormI } from './models'
 import { useArtists } from './ArtistContext'
-import {
-  InputField,
-  SubmitField,
-  TextAreaField,
-  Form
-} from '../../shared/components/FormTemplate'
+import { InputField, SubmitField, TextAreaField, Form } from '../../shared/components/FormTemplate'
 
 const CreateArtistForm = ({ initialFormInputs, updateID }: CreateFormI) => {
+  const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const {
-    formInputsErrors,
-    handleChange,
-    handleBlur,
-    handleSubmit
-  } = useForm()
-
-  const {
-    artistFormInputs,
-    submitButtonText,
-    isSubmitting,
-    setArtistFormInputs,
-    apiCreateArtist,
-    apiUpdateArtist
+    artistFormInputs, submitButtonText, isSubmitting,
+    setArtistFormInputs, apiCreateArtist, apiUpdateArtist
   } = useArtists()
 
   useEffect(() => {

@@ -1,19 +1,9 @@
 import React from 'react'
 import CreateVenueForm from './CreateVenueForm'
 import { VenueContainer } from './styles'
+import { initialFormInputs } from './VenueDefaultData'
 
 const CreateVenue = () => {
-  const initialFormInputs = {
-    id: '',
-    name: '',
-    city: '',
-    county: '',
-    address: '',
-    phone: '',
-    imageLink: '',
-    description: ''
-  }
-
   return (
     <VenueContainer>
       <CreateVenueForm initialFormInputs={initialFormInputs}/>

@@ -17,8 +17,8 @@ export const SliderImageGroup = styled.div < TravelI > `
   & img {
     flex-shrink: 0;
     object-fit: cover;
-    border-radius: 8px;
-    margin: 2px;
+    border-radius: 1rem;
+    margin: 0.1rem;
     width: 350px;
     height: 200px;
   }
@@ -50,6 +50,6 @@ export const SliderImageGroup = styled.div < TravelI > `
 
 export const SliderContainer = styled.div`
   padding: 1rem;
-  border-radius: 3px;
+  border-radius: 1rem;
   box-shadow: 0 0 2px 2px var(--blue);
 `
