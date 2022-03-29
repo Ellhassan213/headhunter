@@ -46,6 +46,7 @@ export type DeleteFunction = (venue: VenuesFormInputs) => void
 export type SetFormInputs = (setVenueFormInputs: VenuesFormInputs) => void
 export type SetVenues = (setVenueList: VenuesFormInputs[]) => void
 export type ContextProviderProps = { children: ReactNode }
+export type SetFormInput = (name: string, value: string) => void
 export type Venues = {
   venueList: VenuesFormInputs[],
   error: boolean,
@@ -55,5 +56,6 @@ export type Venues = {
   apiCreateVenue: BasicFunction,
   apiDeleteVenue: DeleteFunction,
   apiUpdateVenue: UpdateFunction,
-  setVenueFormInputs: SetFormInputs
+  setVenueFormInputs: SetFormInputs,
+  setInput: SetFormInput
 }

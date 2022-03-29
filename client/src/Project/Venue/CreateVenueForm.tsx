@@ -8,19 +8,13 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   const { formInputsErrors, handleChange, handleBlur, handleSubmit } = useForm()
   const {
     venueFormInputs, submitButtonText, isSubmitting,
-    setVenueFormInputs, apiCreateVenue, apiUpdateVenue
+    setVenueFormInputs, apiCreateVenue, apiUpdateVenue,
+    setInput
   } = useVenues()
 
   useEffect(() => {
     setVenueFormInputs(initialFormInputs)
   }, [])
-
-  const setInput = (name: string, value: string) => {
-    setVenueFormInputs({
-      ...venueFormInputs,
-      [name]: value
-    })
-  }
 
   const createVenue = (event: SyntheticEvent) => {
     event.preventDefault()
@@ -35,7 +29,6 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
   }
 
   return (
-    <>
     <Form onSubmit={updateID ? updateVenue : createVenue}>
       <h3>Venue Form</h3>
       <InputField
@@ -113,7 +106,6 @@ const CreateVenueForm = ({ initialFormInputs, updateID }: CreateFormI) => {
         disabled={isSubmitting}
       />
     </Form>
-    </>
   )
 }
 

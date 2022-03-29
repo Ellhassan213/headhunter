@@ -52,6 +52,7 @@ export type DeleteFunction = (artist: ArtistsFormInputs) => void
 export type SetFormInputs = (setArtistFormInputs: ArtistsFormInputs) => void
 export type SetArtists = (setArtistList: ArtistsFormInputs[]) => void
 export type ContextProviderProps = { children: ReactNode }
+export type SetFormInput = (name: string, value: string) => void
 export type Artists = {
   artistList: ArtistsFormInputs[],
   error: boolean,
@@ -61,5 +62,6 @@ export type Artists = {
   apiCreateArtist: BasicFunction,
   apiDeleteArtist: DeleteFunction,
   apiUpdateArtist: UpdateFunction,
-  setArtistFormInputs: SetFormInputs
+  setArtistFormInputs: SetFormInputs,
+  setInput: SetFormInput
 }

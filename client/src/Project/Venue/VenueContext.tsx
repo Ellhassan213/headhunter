@@ -22,6 +22,13 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
     apiGetVenues()
   }, [isMounted])
 
+  const setInput = (name: string, value: string) => {
+    setVenueFormInputs({
+      ...venueFormInputs,
+      [name]: value
+    })
+  }
+
   const apiGetVenues = () => {
     Axios.get('/api/getVenues').then((response) => {
       if (isMounted()) {
@@ -82,7 +89,8 @@ const VenueProvider = ({ children }: ContextProviderProps) => {
         apiDeleteVenue,
         setVenueFormInputs,
         apiCreateVenue,
-        apiUpdateVenue
+        apiUpdateVenue,
+        setInput
       }}>
       <VenueDispatchContext.Provider value={setVenueList}>{children}</VenueDispatchContext.Provider>
     </VenueStatesFunctionsContext.Provider>

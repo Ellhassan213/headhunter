@@ -22,6 +22,13 @@ const ArtistProvider = ({ children }: ContextProviderProps) => {
     apiGetArtists()
   }, [isMounted])
 
+  const setInput = (name: string, value: string) => {
+    setArtistFormInputs({
+      ...artistFormInputs,
+      [name]: value
+    })
+  }
+
   const apiGetArtists = () => {
     Axios.get('/api/getArtists').then((response) => {
       if (isMounted()) {
@@ -82,7 +89,8 @@ const ArtistProvider = ({ children }: ContextProviderProps) => {
         apiDeleteArtist,
         setArtistFormInputs,
         apiCreateArtist,
-        apiUpdateArtist
+        apiUpdateArtist,
+        setInput
       }}>
       <ArtistDispatchContext.Provider value={setArtistList}>{children}</ArtistDispatchContext.Provider>
     </ArtistStatesFunctionsContext.Provider>
